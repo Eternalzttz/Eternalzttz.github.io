@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Dijkstra算法堆优化]]></title>
+    <url>%2F2018%2F09%2F21%2FDijkstra%E7%AE%97%E6%B3%95%E5%A0%86%E4%BC%98%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[利用堆来优化普通的Dijkstra算法，能达到更快的效果。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960#include &lt;cstdio&gt;#include &lt;queue&gt;using namespace std;#define INF 9999999999999typedef long long ll;typedef struct Edge&#123; int u,v,w,nxt;&#125;edge;edge e[500010];int head[100010];int cnt = 0;void addedge(int u,int v,int w)&#123; e[++cnt] = &#123;u,v,w,head[u]&#125;; head[u] = cnt;&#125;int n,m,s;ll dis[100010];struct node&#123; ll u,d; bool operator &lt;(const node&amp;rhs)const&#123; return d&gt;rhs.d; &#125;&#125;;void dijkstra()&#123; for (int i =1;i&lt;=n;i++) dis[i] = INF; dis[s] = 0; priority_queue&lt;node&gt; q; q.push((node)&#123;s,0&#125;); while(!q.empty())&#123; node flag = q.top(); q.pop(); ll u = flag.u,d = flag.d; if(d!=dis[u]) continue; for (int i = head[u];i;i=e[i].nxt)&#123; int v = e[i].v,w = e[i].w; if(dis[v]&gt;dis[u]+w)&#123; dis[v] = dis[u]+w; q.push((node)&#123;v,dis[v]&#125;); &#125; &#125; &#125;&#125;int main()&#123; while(~scanf("%d %d ",&amp;n,&amp;m))&#123; for (int i = 1;i&lt;=m;i++)&#123; int a,b,c; scanf("%d %d %d",&amp;a,&amp;b,&amp;c); addedge(a,b,c); &#125; s = 1; dijkstra(); for (int i = 1;i&lt;=n;i++)&#123; if(dis[i] == INF) printf("-1 "); else printf("%lld ",dis[i]); &#125; printf("\n"); &#125; return 0;&#125;]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>算法</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Dijkstra算法记录最短路径]]></title>
+    <url>%2F2018%2F09%2F20%2FDijkstra%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%2F</url>
+    <content type="text"><![CDATA[用dijkstra算法来记录最短路径方法，用一个数组path[]记录前驱顶点，找到最短路后，从终点倒向追踪，直到找到起点为止。这里可以利用栈来记录路径倒推的过程. 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;stack&gt;using namespace std;#define N 1001#define M 50001#define INF 99999999int n,m,s,t1,t2,t3;;int dis[N],tim[N];bool vis[N];int e[N][N];int pre[N];void dijkstra()&#123; for (int i = 1;i&lt;=n;i++)&#123; dis[i] = e[s][i]; vis[i] = false; pre[i] = dis[i]!=INF&amp;&amp;i!= s? s:-1; &#125; vis[s] = true; int u =1; for (int i =1;i&lt;=n;i++)&#123; int min = INF; for (int j =1;j&lt;=n;j++)&#123; if(!vis[j]&amp;&amp;dis[j]&lt;min)&#123; min = dis[j]; u = j; &#125; &#125; vis[u] = true; for (int v = 1;v&lt;=n;v++)&#123; if(e[u][v]&lt;INF)&#123; if(!vis[v]&amp;&amp;dis[v]&gt;dis[u]+e[u][v])&#123; dis[v] = dis[u] +e[u][v]; pre[v] = u; &#125; &#125; &#125; &#125;&#125;int main()&#123; scanf("%d %d",&amp;n,&amp;m); if(n ==00&amp;&amp;m==0) return 0; memset(dis,0,sizeof(dis)); memset(vis,0,sizeof(vis)); for (int i = 1;i&lt;=n;i++)&#123; for (int j = 1;j&lt;=n;j++) e[i][j] = i==j? 0:INF; &#125; for (int i = 1;i&lt;=m;i++)&#123; scanf("%d %d %d",&amp;t1,&amp;t2,&amp;t3); if(e[t1][t2]&gt;t3) e[t1][t2] = t3; &#125; int start ,end; while(~scanf("%d %d",&amp;start,&amp;end))&#123; s = start; dijkstra(); if(start == end)&#123; printf("从%d到%d的最短路径是：%d\n",start,end,start); printf("最短路径：%d\n",0); &#125;else&#123; stack&lt;int&gt; path; path.push(end); int now = pre[end]; while(1)&#123; path.push(now); if(now == start) break; now = pre[now]; &#125; printf("从%d到%d的最短路线是：%d",start,end,start); path.pop(); while(!path.empty())&#123; printf("--&gt;%d",path.top()); path.pop(); &#125; printf("\n"); printf("最短路径：%d\n",dis[end]); &#125; &#125;&#125; 程序输入：123456789104 81 2 21 3 61 4 42 3 33 1 73 4 14 1 54 3 124 3 程序输出：12从4到3的最短路线是：4--&gt;1--&gt;2--&gt;3最短路径：10]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>算法</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Dijkstra算法求解最短路问题]]></title>
+    <url>%2F2018%2F09%2F20%2FDijkstra%E7%AE%97%E6%B3%95%E6%B1%82%E8%A7%A3%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[Dijkstra算法思路：Dijkstra算法采用的是一种贪心的策略，声明一个数组dis来保存源点到各个顶点的最短距离和一个保存已经找到了最短路径的顶点的集合：T，初始时，原点 s 的路径权重被赋为 0 （dis[s] = 0）。若对于顶点 s 存在能直接到达的边（s,m），则把dis[m]设为w（s, m）,同时把所有其他（s不能直接到达的）顶点的路径长度设为无穷大。初始时，集合T只有顶点s。然后，从dis数组选择最小值，则该值就是源点s到该值对应的顶点的最短路径，并且把该点加入到T中，OK，此时完成一个顶点，然后，我们需要看看新加入的顶点是否可以到达其他顶点并且看看通过该顶点到达其他点的路径长度是否比源点直接到达短，如果是，那么就替换这些顶点在dis中的值。然后，又从dis中找出最小值，重复上述动作，直到T中包含了图的所有顶点。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;cstdio&gt;#include &lt;cstring&gt;#define N 1001#define M 50001#define INF 99999999int n,m,s,t1,t2,t3;;int dis[N],tim[N];bool vis[N];int e[N][N];void dijkstra()&#123; for (int i = 1;i&lt;=n;i++)&#123; dis[i] = e[s][i]; vis[i] = false; &#125; vis[s] = true; int u =1; for (int i =1;i&lt;=n;i++)&#123; int min = INF; for (int j =1;j&lt;=n;j++)&#123; if(!vis[j]&amp;&amp;dis[j]&lt;min)&#123; min = dis[j]; u = j; &#125; &#125; vis[u] = true; for (int v = 1;v&lt;=n;v++)&#123; if(e[u][v]&lt;INF)&#123; if(!vis[v]&amp;&amp;dis[v]&gt;dis[u]+e[u][v])&#123; dis[v] = dis[u] +e[u][v]; &#125; &#125; &#125; &#125;&#125;int main()&#123; scanf("%d %d %d",&amp;n,&amp;m,&amp;s); if(n ==00&amp;&amp;m==0) return 0; memset(dis,0,sizeof(dis)); memset(vis,0,sizeof(vis)); for (int i = 1;i&lt;=n;i++)&#123; for (int j = 1;j&lt;=n;j++) e[i][j] = i==j? 0:INF; &#125; for (int i = 1;i&lt;=m;i++)&#123; scanf("%d %d %d",&amp;t1,&amp;t2,&amp;t3); if(e[t1][t2]&gt;t3) e[t1][t2] = t3; &#125; dijkstra(); for (int i = 1;i&lt;=n;i++) printf("%d ",dis[i]); &#125;]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>算法</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SPFA算法记录最短路径]]></title>
+    <url>%2F2018%2F09%2F19%2FSPFA%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%2F</url>
+    <content type="text"><![CDATA[路径记录方法：用path[]数组依次记录前驱节点，当找到最短路后，由终点倒推，直到找到起点，可以利用一个栈来维护此过程。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586#include &lt;iostream&gt;#include &lt;queue&gt;#include &lt;cstdio&gt;#include &lt;stack&gt;#include &lt;cstring&gt;#define M 1000005#define N 100005#define INF 999999999using namespace std;struct node &#123; int u,v,w,next;&#125;;int head[N],len[N],pre[N];bool vis[N];int n,m,cnt,s = 1;void add(node edge[],int u,int v,int w)&#123; edge[cnt] = &#123;u,v,w,head[u]&#125;; head[u] = cnt++;&#125;void SPFA(queue&lt;int&gt;q,node edge[])&#123; q.push(s); vis[s] = true; for (int i=1;i&lt;=n;i++) len[i] = INF; len[s] = 0; while(!q.empty())&#123; int u = q.front(); q.pop(); vis[u] = false; for (int i = head[u];i&gt;0;i=edge[i].next)&#123; int v = edge[i].v; int w = edge[i].w; if(len[v]&gt; len[u]+w)&#123; len[v] =len[u]+w; pre[v] = u;//记录v的前驱节点为u if(!vis[v])&#123; vis[v] =true; q.push(v); &#125; &#125; &#125; &#125;&#125;int main()&#123; scanf("%d %d",&amp;n,&amp;m); node edge[m+1]; cnt = 1; memset(head, 0, sizeof(head)); memset(len,0,sizeof(len)); memset(vis,false,sizeof(vis)); memset(pre,-1,sizeof(pre)); queue&lt;int&gt;q; for (int i =1;i&lt;=m;i++)&#123; int u,v,w; scanf("%d %d %d",&amp;u,&amp;v,&amp;w); add(edge,u,v,w); //add(edge,v,u,w); &#125; int start,end; while(~scanf("%d %d",&amp;start,&amp;end))&#123; s = start; SPFA(q, edge); if(start == end)&#123; printf("从%d 到%d的最短路线：%d\n",start,end,start); printf("最短路径：%d",0); &#125;else&#123; stack&lt;int&gt; path; path.push(end); int now = pre[end];//now 为end的前驱节点，即倒数第二个节点 while(1)&#123; path.push(now); if(now == start)//找到起点，退出 break; now = pre[now];//依次寻找上一个节点的前驱节点 &#125; printf("从%d到%d的最短路线：%d",start,end,start); path.pop(); while(!path.empty())&#123; printf("--&gt;%d",path.top()); path.pop(); &#125; printf("\n"); printf("最短路径：%d\n",len[end]); &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>算法</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SPFA算法求解最短路问题]]></title>
+    <url>%2F2018%2F09%2F19%2FSPFA%E7%AE%97%E6%B3%95%E6%B1%82%E8%A7%A3%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[SPFA算法实现方法：建立一个队列，初始时队列中只有起始点，用一个数组记录起始点A到其他所有点之间的距离（初始时自身为0，其余为INF),然后利用该点A对与该点直接相通的点Bi进行松弛操作，如果操作成功，而被Bi未在队列中，那么Bi入队。A出队，然后对队列中的下一个元素做相同的操作，直到队列为空，此时数组中的值便是起始点与其余点之间的最短路径。SPFA算法可判断是否存在负权环路，判断方法是检查是否存在一个点进入队列N次。算法复杂度为O(KE).1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768#include &lt;iostream&gt;#include &lt;queue&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#define M 1000005#define N 100005#define INF 99999999using namespace std;struct node &#123; int u,v,w,next;&#125;;int head[N],len[N];bool vis[N];int n,m,cnt,s = 1;void add(node edge[],int u,int v,int w)&#123; /* edge[cnt].u =u; edge[cnt].v = v; edge[cnt].w = w; edge[cnt].next = head[u]; */ edge[cnt]=&#123;u,v,w,head[u]&#125;;//这一句相当于上面四句 head[u] = cnt++;&#125;void SPFA(queue&lt;int&gt;q,node edge[])&#123; q.push(s); vis[s] = true; for (int i=1;i&lt;=n;i++) len[i] = INF; len[s] = 0; while(!q.empty())&#123; int u = q.front(); q.pop(); vis[u] = false; for (int i = head[u];i&gt;0;i=edge[i].next)&#123; int v = edge[i].v; int w = edge[i].w; if(len[v]&gt; len[u]+w)&#123; len[v] =len[u]+w; if(!vis[v])&#123; vis[v] =true; q.push(v); &#125; &#125; &#125; &#125;&#125;int main()&#123; while(~scanf("%d %d %d",&amp;n,&amp;m,&amp;s))&#123;//n为顶点数，m为边数，s为起始点 node edge[m+1]; cnt = 1; memset(head,0, sizeof(head)); memset(len,0,sizeof(len)); memset(vis,false,sizeof(vis)); queue&lt;int&gt;q; for (int i =1;i&lt;=m;i++)&#123; int u,v,w; scanf("%d %d %d",&amp;u,&amp;v,&amp;w); add(edge,u,v,w); //add(edge,v,u,w);如果是无向图，则加上这一句，注意加上后edge数组的范围应扩大一倍 &#125; SPFA(q, edge); for (int i =1;i&lt;=n;i++)&#123; printf("%d ",len[i]); &#125; printf("\n"); &#125;&#125;]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>算法</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Floyd算法记录路径]]></title>
+    <url>%2F2018%2F09%2F19%2FFloyd%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95%E8%B7%AF%E5%BE%84%2F</url>
+    <content type="text"><![CDATA[关于Floyd算法记录路径的方法一般有两种：一是用path[i][j]记录i的后继节点，二是用path[i][j]记录j的前驱节点。第一种方法：利用path[i][j]记录i的后继节点。路径记录关键代码：1: 初始化：1path[i][j] = j; 2:路径转移记录：1path[i][j] = path[i][k]; 完整代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;using namespace std;#define INF 10000001int e[1001][1001];int path[1001][1001];int n,m,t1,t2,t3;void init()&#123; //初始化e,path数组 memset(e,0,sizeof(e)); memset(path,0,sizeof(path)); for (int i = 1;i&lt;=n;i++)&#123; for (int j = 1;j&lt;=n;j++)&#123; if(i == j) e[i][j] = 0; else e[i][j] = INF; path[i][j] = j; &#125; &#125; //输入边 for (int i =1;i&lt;=m;i++)&#123; scanf("%d %d %d",&amp;t1,&amp;t2,&amp;t3); if(e[t1][t2]&gt;t3) e[t1][t2] = t3; &#125;&#125;void Floyd()&#123; //floyd算法 for (int k =1;k&lt;=n;k++)&#123; for (int i = 1;i&lt;=n;i++)&#123; for (int j =1;j&lt;=n;j++)&#123; if(e[i][j]&gt;e[i][k]+e[k][j])&#123; e[i][j]=e[i][k]+e[k][j]; path[i][j] = path[i][k]; &#125; &#125; &#125; &#125;&#125;int main()&#123; scanf("%d %d",&amp;n,&amp;m); init(); Floyd(); int start,end; //得出从start 到end 的路径 while(~scanf("%d %d",&amp;start,&amp;end))&#123; if(start == end)&#123; printf("从%d到%d的最优路线 : %d\n",start,end,start); printf("最短路径：%d\n",0); &#125; else&#123; printf("从%d到%d的最短路线：%d",start,end,start); int now= path[start][end]; while(1)&#123; printf("--&gt;%d",now); if(now == end) break; now = path[now][end]; &#125; printf("\n"); printf("最短路径：%d\n",e[start][end]); &#125; &#125; return 0;&#125; 第二种方法：利用path[i][j]记录j的前驱节点,这个方法需要利用stack来输出路径路径记录关键代码：1:初始化：1pre[i][j] = i; 2:路径转移记录：1pre[i][j] = pre[k][j]; 完整代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;stack&gt;#include &lt;algorithm&gt;#define INF 10000001using namespace std;int e[1001][1001];int pre[1001][1001];int n,m,t1,t2,t3;void init()&#123; memset(e,0,sizeof(e)); memset(pre, 0, sizeof(pre)); for (int i =1;i&lt;=n;i++)&#123; for (int j =1;j&lt;=n;j++)&#123; e[i][j] = i==j? 0:INF; pre[i][j] = i; &#125; &#125; for (int i = 1;i&lt;=m;i++)&#123; scanf("%d %d %d",&amp;t1,&amp;t2,&amp;t3); if(e[t1][t2]&gt;t3) e[t1][t2] = t3; &#125;&#125;void Floyd()&#123; for (int k =1;k&lt;=n;k++)&#123; for (int i = 1;i&lt;=n;i++)&#123; for (int j =1;j&lt;=n;j++)&#123; if(e[i][j]&gt;e[i][k]+e[k][j])&#123; e[i][j] = e[i][k]+e[k][j]; pre[i][j] = pre[k][j]; &#125; &#125; &#125; &#125;&#125;int main()&#123; scanf("%d %d",&amp;n,&amp;m); init(); Floyd(); int start,end; while(~scanf("%d %d",&amp;start,&amp;end))&#123; if(start == end)&#123; printf("从 %d 到 %d 的最短路线：%d\n",start,end,start); printf("最短路径:%d\n",0); &#125;else&#123; int now = pre[start][end]; stack&lt;int&gt;path; path.push(end); while(1)&#123; path.push(now); if(now == start) break; now = pre[start][now]; &#125; printf("从 %d 到 %d 的最短路线：%d",start,end,start); path.pop(); while(!path.empty())&#123; printf("--&gt;%d",path.top()); path.pop(); &#125; printf("\n"); printf("最短路径：%d\n",e[start][end]); &#125; &#125; return 0;&#125;]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>算法</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[floyd最短路算法]]></title>
+    <url>%2F2018%2F09%2F18%2Ffloyd%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[Floyd算法是一种动态规划算法，适用于多源最短路径，相对于Dijkstra算法和SPFA算法，其算法复杂度较高，时间复杂度为O(n^3),但其理解较为容易，且代码简单。其基本思想便是对点松弛，在任意 i,j 顶点中，看是否存在顶底k,使得i -&gt; k -&gt; j 的距离小于i -&gt; j的距离，如果存在，则对该两点进行松弛操作。核心代码：12345678for (int k = 1;k&lt;=n;k++)&#123; for (int i = 1;i&lt;=n;i++)&#123; for (int j = 1;j&lt;=n;j++)&#123; if(e[i][j]&gt;e[i][k]+e[k][j]) e[i][j] = e[i][k]+e[k][j]; &#125; &#125; &#125; 完整代码：1234567891011121314151617181920212223242526272829303132333435#include &lt;stdio.h&gt;int e[1000][1000];int main()&#123; int n,m,t1,t2,t3; int inf = 9999999; scanf("%d %d",&amp;n,&amp;m); for (int i = 1;i&lt;=n;i++) for (int j =1 ;j&lt;=n;j++)&#123; if(i == j) e[i][j] = 0; else e[i][j] = inf; &#125; for (int i =1 ;i&lt;=m;i++)&#123; scanf("%d %d %d",&amp;t1,&amp;t2,&amp;t3); //这里if主要是为了在存在多条从t1到t2的路径时，记录最短的一条 if(e[t1][t2]&gt;t3) e[t1][t2] = t3; &#125; for (int k = 1;k&lt;=n;k++)&#123; for (int i = 1;i&lt;=n;i++)&#123; for (int j = 1;j&lt;=n;j++)&#123; if(e[i][j]&gt;e[i][k]+e[k][j]) e[i][j] = e[i][k]+e[k][j]; &#125; &#125; &#125; for (int i =1 ;i&lt;=n;i++)&#123; for (int j = 1;j&lt;=n;j++) printf("%d ",e[i][j]); printf("\n"); &#125; return 0;&#125; 测试数据：1234567894 81 2 21 3 61 4 42 3 33 1 73 4 14 1 54 3 12 输出：12340 2 5 4 9 0 3 4 6 8 0 1 5 7 10 0]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>算法</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C语言快速排序]]></title>
+    <url>%2F2018%2F09%2F17%2FC%E8%AF%AD%E8%A8%80%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[快速排序；基本思路： 从当前参加排序的元素中任选一个元素作为分界元素，与当前参加排序的那些元素进行比较. 凡是小于分界元素的元素都移到分界元素的前面,凡是大于分界元的元素都移到分界元素的后面。 分界元素将当前参加排序的元素分成前后两部分,而分界元素处在排序的最终位置。 然后，分别对这两部分中大小大于1的部分重复上述过程直到排序结束时间复杂度为：O(nlogn) 12345678910111213141516171819202122232425262728293031#include &lt;stdio.h&gt;#define SWAP(a,b) &#123;int t = a;a =b;b =t;&#125;void quicksort(int a[],int left,int right)&#123; if(left&gt;=right) return ; int key = a[left]; int i = left,j = right; while(i&lt;j)&#123; while(i&lt;j&amp;&amp;a[j]&gt;=key) j--; a[i] = a[j]; while(i&lt;j&amp;&amp;a[i]&lt;=key) i++; a[j] = a[i]; &#125; a[i] =key; quicksort(a, left, i-1); quicksort(a, i+1, right);&#125;int main()&#123; int n; while(~scanf(&quot;%d&quot;,&amp;n))&#123; int num[n]; for (int i =0 ;i&lt;n;i++) scanf(&quot;%d&quot;,&amp;num[i]); quicksort(num,0,n-1); for (int i = 0;i&lt;n;i++) printf(&quot;%d &quot;,num[i]); printf(&quot;\n&quot;); &#125;&#125; 程序输入：1291 5 6 8 4 3 2 9 15 程序输出：11 2 3 4 5 6 8 9 15]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>C</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C语言堆排序]]></title>
+    <url>%2F2018%2F09%2F17%2FC%E8%AF%AD%E8%A8%80%E5%A0%86%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[堆排序：堆排序可以看成优化版的选择排序 堆排序的基本思想是：将待排序序列构造成一个大顶堆，此时，整个序列的最大值就是堆顶的根节点。将其与末尾元素进行交换，此时末尾就为最大值。然后将剩余n-1个元素重新构造成一个堆，这样会得到n个元素的次小值。如此反复执行，便能得到一个有序序列了其算法时间复杂度为O(nlogn) 12345678910111213141516171819202122232425262728293031323334353637383940#include &lt;stdio.h&gt;#define SWAP(a,b) &#123;int t = a;a = b;b = t;&#125;void adjust(int a[],int i,int n);void heapSort(int a[],int n);int main()&#123; int i,n; scanf("%d",&amp;n); int num[n]; for (i =0 ;i&lt;n;i++) scanf("%d",&amp;num[i]); heapSort(num,n); for (i =0;i&lt;n;i++) printf("%d ",num[i]);&#125;void adjust(int a[],int i,int n)&#123; int j,temp; temp = a[i]; j = 2*i+1; while(j&lt;n)&#123; if(j+1&lt;n&amp;&amp;a[j]&lt;a[j+1]) j++; if(temp&lt;a[j])&#123; a[(j-1)/2] = a[j]; j = 2*j+1; &#125; else break; &#125; a[(j-1)/2] = temp;&#125;void heapSort(int a[],int n)&#123; int i; for (i = n/2-1;i&gt;=0;i--) adjust(a,i,n); for (i = n-1;i&gt;=1;i--)&#123; SWAP(a[0],a[i]); adjust(a,0,i); &#125;&#125; 程序输入：1291 5 6 8 4 3 2 9 15 程序输出：11 2 3 4 5 6 8 9 15]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>C</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C语言冒泡排序]]></title>
+    <url>%2F2018%2F09%2F17%2FC%E8%AF%AD%E8%A8%80%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[冒泡排序是一种简单的排序算法 ，其基本思路如下： 比较相邻的元素，如果前一个比后一个大，就把它们两个调换位置。 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。 针对所有的元素重复以上的步骤，除了最后一个。 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。其算法时间复杂度为O(n^2). 12345678910111213141516171819202122232425262728#include &lt;stdio.h&gt;#define SWAP(a,b) &#123;int t = a;a =b;b =t;&#125;//宏定义交换过程void bubbleSort(int a[],int n);int main()&#123; int i,n; scanf("%d",&amp;n); int num[n]; for (i =0 ;i&lt;n;i++) scanf("%d",&amp;num[i]); bubbleSort(num,n); for (i =0;i&lt;n;i++) printf("%d ",num[i]);&#125;void bubbleSort(int a[],int n)&#123; int i,j; int flag = 0; for (i =0 ;i&lt;n;i++)&#123; flag = 0; for (j = 0;j&lt;n-1-i;j++)&#123; if(a[j]&gt;a[j+1])&#123; SWAP(a[j], a[j+1]); flag=1; &#125; &#125; if(flag == 0) break;//如果某一趟排序没有进行交换，说明排序已经结束，可以略微提高排序的效率 &#125;&#125; 程序输入：1291 5 6 8 4 3 2 9 15 程序输出：11 2 3 4 5 6 8 9 15]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>C</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C语言选择排序]]></title>
+    <url>%2F2018%2F09%2F17%2FC%E8%AF%AD%E8%A8%80%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[选择排序是基本排序算法之一，其基本思路为： 初始时选择整个序列中最小的一个，将其放在序列开头，此时其便为已排序序列（只有一个元素） 从剩余为排序序列中，选择最小的一个，将其放在已排序序列的末尾 重复 2 过程，直到所有的元素都在已排序序列中 算法时间复杂度为O(n^2). 123456789101112131415161718192021222324#include &lt;stdio.h&gt;#define SWAP(a,b) &#123;int t = a;a =b;b =t;&#125;//利用宏定义来定义交换过程，简化代码void selectSort(int a[],int n);int main()&#123; int i,n; scanf("%d",&amp;n); int num[n]; for (i =0 ;i&lt;n;i++) scanf("%d",&amp;num[i]); selectSort(num,n); for (i =0;i&lt;n;i++) printf("%d ",num[i]);&#125;void selectSort(int a[],int n)&#123; int i =0,j =0; int min = 0; for ( i =0 ;i&lt;n;i++)&#123; min = i;//将最小值标记为i for (j = i+1;j&lt;n;j++) if(a[j]&lt;a [min])//在i后寻找最小值 min = j; SWAP(a[i],a[min]);//交换i与最小值 &#125;&#125; 程序输入：1291 5 6 8 4 3 2 9 15 程序输出：11 2 3 4 5 6 8 9 15]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>C</tag>
+        <tag>排序算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C语言插入排序]]></title>
+    <url>%2F2018%2F09%2F17%2FC%E8%AF%AD%E8%A8%80%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[插入排序：插入排序算法就如同它的名字，依次在有序数组中插入待排数据，直到所有的元素都已排好序，其基本思路如下： 将第一个元素看成有序数组的首位，其余元素看成待排数据 将第二个元素与第一个元素比较，如果比第一个元素小，则第一个元素后移，然后将第二个元素放在因为后移空出的位置上，此时有序数组中有两个元素 依次重复该过程，将第i个数据与前1···i-1个有序数据比较，如果比其小，则元素后移，直到遇到一个不小于改元素的值，然后将该元素放在空出的位置上插入排序的时间复杂度为O(n^2)，不过，在数据量很小的时候（一般不超过100）,插入排序有着十分迅速的运行速率。 123456789101112131415161718192021222324252627#include &lt;stdio.h&gt;#define SWAP(a,b) &#123;int t = a;a =b;b =t;&#125;void insertSort(int a[],int n);int main()&#123; int n,i; scanf("%d",&amp;n); int num[n]; for (i =0 ;i&lt;n;i++) scanf("%d",&amp;num[i]); insertSort(num,n); for (i =0 ;i&lt;n;i++) printf("%d ",num[i] ); return 0;&#125;void insertSort(int a[],int n)&#123; int i,j,flag; for (i = 0;i&lt;n;i++)&#123; flag = a[i]; for (j =i-1;j&gt;=0;j--)&#123; if(flag&lt;a[j])&#123; SWAP(a[j], a[j+1]); &#125; else break; &#125; &#125;&#125; 程序输入：1291 5 6 8 4 3 2 9 15 程序输出：11 2 3 4 5 6 8 9 15]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>C</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C语言归并排序]]></title>
+    <url>%2F2018%2F05%2F23%2FC%E8%AF%AD%E8%A8%80%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[归并排序：归并排序采用了分治的思想，在排好n个数之前，先将前n/2个数和后n/2的数排好，利用递归以此类推，然后将已排好序的两个n/2数组合并为一个长度为n的有序数组。 该算法需要一个作为中间传递已排好序数值的数组 归并排序时间复杂度为O(nlogn)，空间复杂度为O(n) 12345678910111213141516171819202122232425262728293031323334#include &lt;stdio.h&gt;#define N 10000int k[N];void merge(int a[],int left,int right)&#123; if(left == right)//递归的终止条件，当left==right时，只有一个元素，此时已是默认排好序的了 return ; int mid = (left+right)/2;//二分 merge(a,left,mid);//排序前半部分 merge(a,mid+1,right);//排序后半部分 int i = left,j =mid+1,p= left;//合并已经排好序的数组 while(i&lt;=mid&amp;&amp;j&lt;=right)&#123; if(a[i]&lt;a[j]) k[p++] = a[i++]; else k[p++] = a[j++]; &#125; while(i&lt;=mid)//如果有数组没有全部合并完，则直接放在合并数组后面 k[p++] = a[i++]; while(j&lt;=right) k[p++] = a[j++]; for (i = left;i&lt;=right;i++)//将k[]返回a[]数组中 a[i] = k[i];&#125;int main()&#123; int n; scanf("%d",&amp;n); int a[n]; for (int i = 0;i&lt;n;i++) scanf("%d",&amp;a[i]); merge(a,0,n-1); for (int i = 0;i&lt;n;i++) printf("%d ",a[i]); return 0;&#125; 程序输入： 1291 5 6 8 4 3 2 9 15 程序输出：11 2 3 4 5 6 8 9 15]]></content>
+      <tags>
+        <tag>模板</tag>
+        <tag>C</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[关于hexo的常用命令操作]]></title>
+    <url>%2F2018%2F04%2F17%2F%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[刚使用hexo时，对于自己如何去部署自己的blog还不太了解，本篇文章做一个小记。注意：执行代码要先在终端中进入存放hexo的文件夹 方式 :$ cd 文件夹名1$ hexo clean 清除缓存文件和已生成的静态文件 1$ hexo new post &quot;the article&apos;s title 建立一个新的文件,文件名为“ the article’s title”，此时文件已经建立 好了，接下来就是找到该文件写下自己的blog，hexo的文件符合markdown语法。1$ hexo generate 生成静态文件，可以简写为$ hexo g1$ hexo deploy 部署网站，可以简写为$ hexo d 上面这两条命令可以合并在一起，记为$ hexo g -d 或者$hexo d -g1$ hexo server 启动服务器，可以简写为$ hexo s.默认情况下，访问网址为：http://localhost:4000/. 通常部署blog只需要三步： 使用 $hexo new post &quot;title name&quot; 建立新的文件 使用 markdown语法写自己的blog 使用$hexo g -d部署blog接下来打开网址就可以看到自己的blog已经部署好了]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>部署</tag>
+      </tags>
+  </entry>
+</search>
