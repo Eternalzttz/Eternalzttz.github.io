@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hanoi 问题]]></title>
+    <url>%2F2018%2F09%2F26%2FHanoi-%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[有三根杆子A，B，C。A杆上有N个(N&gt;1)穿孔圆盘，盘的尺寸由下到上依次变小。要求按下列规则将所有圆盘移至C杆： 每次只能移动一个圆盘； 大盘不能叠在小盘上面。请输出全部的移动操作。 输入：一个整数n，表示汉诺塔的层数(n &lt; 20)输出：输出把汉诺塔从A移到C的全部操作，每个操作一行 12345678910111213141516#include &lt;cstdio&gt;void Move(int n,char a,char b,char c)&#123; if(n == 1) printf("%c -&gt; %c\n",a,c); else&#123; Move(n-1,a,c,b); printf("%c -&gt; %c\n",a,c); Move(n-1,b,a,c); &#125;&#125;int main()&#123; int n; scanf("%d",&amp;n); Move(n,'A','B','C'); return 0;&#125; 输入：13 输出：1234567A -&gt; CA -&gt; BC -&gt; BA -&gt; CB -&gt; AB -&gt; CA -&gt; C]]></content>
+      <tags>
+        <tag>算法学习日历</tag>
+        <tag>Hanoi</tag>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Dijkstra算法堆优化]]></title>
     <url>%2F2018%2F09%2F21%2FDijkstra%E7%AE%97%E6%B3%95%E5%A0%86%E4%BC%98%E5%8C%96%2F</url>
     <content type="text"><![CDATA[利用堆来优化普通的Dijkstra算法，能达到更快的效果。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960#include &lt;cstdio&gt;#include &lt;queue&gt;using namespace std;#define INF 9999999999999typedef long long ll;typedef struct Edge&#123; int u,v,w,nxt;&#125;edge;edge e[500010];int head[100010];int cnt = 0;void addedge(int u,int v,int w)&#123; e[++cnt] = &#123;u,v,w,head[u]&#125;; head[u] = cnt;&#125;int n,m,s;ll dis[100010];struct node&#123; ll u,d; bool operator &lt;(const node&amp;rhs)const&#123; return d&gt;rhs.d; &#125;&#125;;void dijkstra()&#123; for (int i =1;i&lt;=n;i++) dis[i] = INF; dis[s] = 0; priority_queue&lt;node&gt; q; q.push((node)&#123;s,0&#125;); while(!q.empty())&#123; node flag = q.top(); q.pop(); ll u = flag.u,d = flag.d; if(d!=dis[u]) continue; for (int i = head[u];i;i=e[i].nxt)&#123; int v = e[i].v,w = e[i].w; if(dis[v]&gt;dis[u]+w)&#123; dis[v] = dis[u]+w; q.push((node)&#123;v,dis[v]&#125;); &#125; &#125; &#125;&#125;int main()&#123; while(~scanf("%d %d ",&amp;n,&amp;m))&#123; for (int i = 1;i&lt;=m;i++)&#123; int a,b,c; scanf("%d %d %d",&amp;a,&amp;b,&amp;c); addedge(a,b,c); &#125; s = 1; dijkstra(); for (int i = 1;i&lt;=n;i++)&#123; if(dis[i] == INF) printf("-1 "); else printf("%lld ",dis[i]); &#125; printf("\n"); &#125; return 0;&#125;]]></content>
