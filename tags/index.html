@@ -448,7 +448,7 @@
                 目前共计 11 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/C/" style="font-size: 21px; color: #6f6f6f">C</a> <a href="/tags/Hanoi/" style="font-size: 12px; color: #ccc">Hanoi</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/排序/" style="font-size: 16.5px; color: #9d9d9d">排序</a> <a href="/tags/排序算法/" style="font-size: 12px; color: #ccc">排序算法</a> <a href="/tags/最短路/" style="font-size: 25.5px; color: #404040">最短路</a> <a href="/tags/模板/" style="font-size: 30px; color: #111">模板</a> <a href="/tags/算法/" style="font-size: 25.5px; color: #404040">算法</a> <a href="/tags/算法学习日历/" style="font-size: 12px; color: #ccc">算法学习日历</a> <a href="/tags/递归/" style="font-size: 12px; color: #ccc">递归</a> <a href="/tags/部署/" style="font-size: 12px; color: #ccc">部署</a>
+              <a href="/tags/C/" style="font-size: 15px; color: #111">C</a> <a href="/tags/Hanoi/" style="font-size: 15px; color: #111">Hanoi</a> <a href="/tags/hexo/" style="font-size: 15px; color: #111">hexo</a> <a href="/tags/排序/" style="font-size: 15px; color: #111">排序</a> <a href="/tags/排序算法/" style="font-size: 15px; color: #111">排序算法</a> <a href="/tags/最短路/" style="font-size: 15px; color: #111">最短路</a> <a href="/tags/模板/" style="font-size: 15px; color: #111">模板</a> <a href="/tags/算法/" style="font-size: 15px; color: #111">算法</a> <a href="/tags/算法学习日历/" style="font-size: 15px; color: #111">算法学习日历</a> <a href="/tags/递归/" style="font-size: 15px; color: #111">递归</a> <a href="/tags/部署/" style="font-size: 15px; color: #111">部署</a>
             </div>
           </div>
         
@@ -494,9 +494,11 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <a href="/">
               <img class="site-author-image" itemprop="image"
                 src="/images/header.jpg"
                 alt="Eternal_zttz" />
+             </a>
             
               <p class="site-author-name" itemprop="name">Eternal_zttz</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -612,7 +614,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Eternal_zttz</span>
 
@@ -636,9 +638,36 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
     <span title="站点阅读时长">22 分钟</span>
-  
-</div>
 
+<div id="days"></div>
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("04/17/2018 15:13:14");
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="本站已安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+}
+show_date_time();
+</script>
+  
+
+</div>
 
 
 
