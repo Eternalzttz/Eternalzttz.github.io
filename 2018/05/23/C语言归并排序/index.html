@@ -956,6 +956,9 @@ show_date_time();
 
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+
+  
    <script type="text/javascript">
         var gitalk = new Gitalk({
           clientID: '80315b572e0c6a8749d0',
@@ -963,7 +966,7 @@ show_date_time();
           repo: 'Eternalzttz.github.io',
           owner: 'Eternalzttz',
           admin: ['Eternalzttz'],
-          id: location.pathname,
+          id: md5(location.pathname),
           distractionFreeMode: 'true'
         })
         gitalk.render('gitalk-container')           
