@@ -77,10 +77,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
@@ -99,7 +99,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '6.3.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -383,7 +383,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2018/09/29/hexo-next-主题优化/" itemprop="url">
-                  hexo-next-主题优化，打造个人精致网站
+                  未命名
                 </a>
               
             
@@ -409,7 +409,7 @@
                 
               
 
-              <time title="创建时间：2018-09-29 09:50:08 / 修改时间：12:44:41" itemprop="dateCreated datePublished" datetime="2018-09-29T09:50:08+08:00">2018-09-29</time>
+              <time title="创建时间：2018-09-29 09:50:08 / 修改时间：15:54:02" itemprop="dateCreated datePublished" datetime="2018-09-29T09:50:08+08:00">2018-09-29</time>
             
 
             
@@ -441,7 +441,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.7k</span>
+                <span title="本文字数">7.1k</span>
               
 
               
@@ -455,7 +455,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">6 分钟</span>
               
             </div>
           
@@ -476,45 +476,14 @@
 
       
         
-          
-            <p>##写在前面<br>   关于个人博客，其实自己很早之前就有了这个打算，然而因为种种的原因<del>（其实就是自己懒）</del>，自己一直没有把自己的博客真正的上线，自从四月份写了第一篇blog后就没有碰过了。直到暑假的时候，闲来无事了解算法，观摩了各路大神的blog，才发现，<del>woc，他们的blog怎么这么好看</del>。回想自己大一的一年，貌似自己在这一年内也没有留下些什么，so趁着假期还有时间，将自己荒废已久的blog又拿了出来。<br>   回到正题，既然决定要搭建个人blog，界面ugly怎么行？<del>常言道：</del></p>
-<blockquote>
-<p>生活还是精致一点的好.                                             –佚名</p>
-</blockquote>
-<p>  so经过不断的优化，博主的blog也终于有了一点小起色，才有了现在的界面，个人感觉还是挺ok的。然而，在布置界面的时候，深受网上来来去去搜索的痛苦，所以在这里，本人做一个小结。不敢说能把各位的blog布置的有多好看，但至少，达到我这个程度还是可以的。</p>
-<p>##blog配置<br>   <del>常言道：</del></p>
-<blockquote>
-<p>任何不谈配置只谈操作的行为都是在耍流氓                               –佚名</p>
-</blockquote>
-<p>虽说hexo的版本3.x之间改动也不是很大，next5.x系列和现在的6.x系列也差不多，但是终归还是有那么一点细小的变化，保不准就会有bug生成，所以博主还是提一下自己的blog配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hexo v3.7.1     Next v6.3.0   编辑器：sublime text2</span><br></pre></td></tr></table></figure></p>
-<p>就目前为止，已经算是挺新版的了，当然，大多数配置各版本之间都一样，大家可以酌情考虑版本的选择。</p>
-<p>  <strong>好了！准备进入正题！本blog将带领各位怎么将一个空空如也的blog装饰成博主一样有那么一点起色的网站。博主将从零搭起，所有的操作都将在博主的笔记本上为大家做出示范。</strong></p>
-<p>##next主题基本配置<br>首先我们先下载<a href="https://github.com/theme-next/hexo-theme-next/releases" target="_blank">next主题:</a>在这里选择大家需要的版本进行下载。下载完成后，我们的blog便有了两个主要的配置文件，分别是hexo自带的<code>_config.yml</code>文件和next主题自带的<code>_config.yml</code>文件，为了方便，我们将hexo自带的<code>_config.yml</code>文件称为站点配置文件，next主题带的<code>_config.yml</code>文件称为主题配置文件。</p>
-<p>首先，第一步我们来更换一下blog的主题，这一步又分为三个小步骤：</p>
-<ol>
-<li>将下载下来的next主题文件夹重命名为  next  。</li>
-<li>将next文件夹移入blog所在的文件夹的themes 文件夹中，在这里，本人是<code>/blog/themes</code> </li>
-<li>修改站点配置文件，在配置文件中搜索<strong>theme</strong>，将其的值改为<strong>next</strong>。<strong>注意 冒号： 后面一定要有一个空格</strong><br>// 站点_config.yml 文件<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>现在主题就已经配置好了，接下来我们优化一下：继续修改站点配置文件：<br>// 站点_config.yml 文件<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Eternal_zttz</span> <span class="comment">#网站的名字</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">Saty</span> <span class="string">Hungry，Stay</span> <span class="string">Foolish</span> <span class="comment">#网站的副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">个人blog网站</span> <span class="comment">#个人的描述</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Eternal_zttz</span> <span class="comment">#博主的名字</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span> <span class="comment">#blog的语言  zh-CN 代表中文</span></span><br><span class="line"><span class="attr">timezone:</span></span><br></pre></td></tr></table></figure></p>
-<p>然后我们修改主题配置文件：<br>// 主题_config.yml 文件 ，搜索Schemes可找到<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br></pre></td></tr></table></figure></p>
-<p>这是next的基本页面布局，默认为Muse布局，在这里，我们选择第三个Pisces</p>
-<p>很好，接下来，我们在终端命令行cd 进入blog所在目录，如我是直接命名为blog，所以<code>cd blog</code>:</p>
-<p>接着运行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<p>在浏览器中打开链接：不出意外，打开后会是这么样的界面：<br><img src="/Users/eternal/Desktop/webtest.png" alt="blog"><br>ok，我们的blog已经略有起色，样式已经离我们的最终样式八九不离十了，接下来，我们继续对其进行优化。</p>
-<p>##next主题页面生成<br>我们可以看到，hexo默认生成的页面只有两个，即<strong>首页</strong>和<strong>归档</strong> 页面，对于有强迫症的我来说简直是<strong>不！</strong>  <strong>协！</strong>  <strong>！调</strong>，那么接下来，我们来生成我们所需的页面：</p>
-<p>###页面的生成：<br>首先，我们修改主题配置文件：<br>// 主题_config.yml 文件 ，搜索menu可找到<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span>   <span class="comment">#主页</span></span><br><span class="line"><span class="attr">  about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">user</span>  <span class="comment">#关于</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span>   <span class="comment">#标签</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span>  <span class="comment">#分类</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span>  <span class="comment">#归档</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar  #日程表</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap   #站点地图</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat    #公益404</span></span><br></pre></td></tr></table></figure></p>
-<p>可以看到，大部分的都是注释掉了的，这里我已经把我需要的页面注释解除了，大家可以自行考虑需要的页面。<br>在这里，<strong>斜线//</strong>之间的文字是 该页面 的名字，如／about／ ，说明我们要<strong>跳转的页面</strong>的名字为about  ,  而<strong>||</strong>后的文字是这个页面的图标名字.<br>这样我们主页上就可以看到这几个页面，接下来实现页面的跳转：</p>
-<p>####生成about页面：<br>终端回到blog的根目录.运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;about&quot;</span><br></pre></td></tr></table></figure></p>
-<p>ok,接下来<strong>关于</strong>页面的markdown自己编写就行。</p>
-<p>####生成tags页面：<br>终端回到blog的根目录.运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure></p>
-<p>####生成categories页面：<br>终端回到categories的根目录.运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;categories&quot;</span><br></pre></td></tr></table></figure></p>
-<p>tags和categorise页面不用自己布局，会自动根据我们的blog的布局好</p>
-<p>ok! all right</p>
-
-          
+          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>   关于个人博客，其实自己很早之前就有了这个打算，然而因为种种的原因<del>（其实就是自己懒）</del>，自己一直没有把自己的博客真正的上线，自从四月份写了第一篇blog后就没有碰过了。直到暑假的时候，闲来无事了解算法，观摩了各路大神的blog，才发现，<del>woc，他们的blog怎么这么好看</del>。回想自己大一的一年，貌似自己在这一年内也没有留下些什么，so趁着假期还有时间，将自己荒废已久的blog又拿了出来。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/29/hexo-next-主题优化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2380,11 +2349,6 @@
       
 
       
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-        </div>
-      
 
     </div>
   </aside>
@@ -2411,7 +2375,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">27k</span>
+    <span title="站点总字数">31k</span>
   
 
   
@@ -2422,7 +2386,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">25 分钟</span>
+    <span title="站点阅读时长">29 分钟</span>
 
 <div id="days"></div>
 <script>
@@ -2489,6 +2453,11 @@ show_date_time();
       </div>
     </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
     
@@ -2926,35 +2895,6 @@ show_date_time();
   
 
   
-  
-
-  
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-  
-
 
   
   
