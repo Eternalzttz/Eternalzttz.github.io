@@ -54,7 +54,7 @@ figure {
 	display: flex;
 	flex-wrap: wrap;
 	clear: both;
-	width: 100%;
+	
 	text-align: left;
 }
 .instagram .album li{
