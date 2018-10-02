@@ -1,5 +1,5 @@
-<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-CN"><head>
-
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-CN"><head><script src="/js/src/photoswipe.min.js?v="></script>
+<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
 
 
 
@@ -53,21 +53,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
 
 
 
@@ -129,7 +129,11 @@
 
 
 
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>C语言快速排序 | Eternal_zttz</title>
   
@@ -787,7 +791,31 @@
     <span title="站点阅读时长">1:17</span>
 
 <div id="days"></div>
-
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("04/17/2018 15:13:14");
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="本站已安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+}
+show_date_time();
+</script>
   
 
 </div>
@@ -842,7 +870,11 @@
 
   
 
-
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
@@ -871,36 +903,26 @@
 
   
   
-    
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    
-  
-
-
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
 
   
 
-  
 
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
 
-
-  
-  
-
-
-  
-
-  
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
 
 
 
@@ -908,7 +930,17 @@
   
 
 
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
 
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe.min.js?v="></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
 
 
 
@@ -916,7 +948,7 @@
   
 
 
-  
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
 
 
 
@@ -937,115 +969,11 @@
 
   <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
   <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-  
+  <script src="/js/src/md5.min.js"></script>
 
   
-   
-
-
-
-
-  
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
-
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
-
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  
-
-
-
-
-
-
-
-
-<script type="text/javascript" src="/bundle.js"></script><script type="text/javascript">CONFIG.page = {
-    sidebar: "",
-  };;function show_date_time(){
-    window.setTimeout("show_date_time()", 1000);
-    BirthDay=new Date("04/17/2018 15:13:14");
-    today=new Date();
-    timeold=(today.getTime()-BirthDay.getTime());
-    sectimeold=timeold/1000
-    secondsold=Math.floor(sectimeold);
-    msPerDay=24*60*60*1000
-    e_daysold=timeold/msPerDay
-    daysold=Math.floor(e_daysold);
-    e_hrsold=(e_daysold-daysold)*24;
-    hrsold=setzero(Math.floor(e_hrsold));
-    e_minsold=(e_hrsold-hrsold)*60;
-    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
-    seconds=setzero(Math.floor((e_minsold-minsold)*60));
-    document.getElementById('days').innerHTML="本站已安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
-}
-function setzero(i){
-    if (i<10)
-    {i="0" + i};
-    return i;
-}
-show_date_time();;if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  };var gitalk = new Gitalk({
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
           clientID: '80315b572e0c6a8749d0',
           clientSecret: '2c716771640bd81d72d083c5116e04d3a59d351e',
           repo: 'Eternalzttz.github.io',
@@ -1054,7 +982,16 @@ show_date_time();;if (Object.prototype.toString.call(window.Promise) !== '[objec
           id: md5(location.pathname),
           distractionFreeMode: 'true'
         })
-        gitalk.render('gitalk-container');// Popup Window;
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
     var isfetched = false;
     var isXml = true;
     // Search DB path;
@@ -1370,7 +1307,72 @@ show_date_time();;if (Object.prototype.toString.call(window.Promise) !== '[objec
       if (shouldDismissSearchPopup) {
         onPopupClose();
       }
-    });;$('.highlight').each(function (i, e) {
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
       var $wrap = $('<div>').addClass('highlight-wrap')
       $(e).after($wrap)
       $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
@@ -1398,4 +1400,13 @@ show_date_time();;if (Object.prototype.toString.call(window.Promise) !== '[objec
           $b.text('Copy')
         }, 300)
       }).append(e)
-    });InstantClick.init();</script></body></html><!-- 页面点击小红心 -->
+    })
+  </script>
+
+
+
+
+
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body></html><!-- 页面点击小红心 -->

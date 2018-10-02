@@ -1,5 +1,5 @@
-<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-CN"><head>
-
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-CN"><head><script src="/js/src/photoswipe.min.js?v="></script>
+<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
 
 
 
@@ -53,21 +53,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
 
 
 
@@ -105,8 +105,8 @@
 
 
 <link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
-
-<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
+<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"></script></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
   <meta name="description" content="Saty Hungry,Stay Foolish                ——Steve Jobs  (function(){var player = new DPlayer({&quot;container&quot;:document.getElementById(&quot;dplayer0&quot;),&quot;video&quot;:{&quot;url&quot;:&quot;http://pfv94oich.bkt.clouddn.com/test.mp4&quot;}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Eternal_zttz">
@@ -130,7 +130,11 @@
 
 
 
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>Eternal_zttz | Eternal_zttz</title>
   
@@ -382,12 +386,28 @@
           <blockquote>
 <p>Saty Hungry,Stay Foolish                ——Steve Jobs</p>
 </blockquote>
-<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div>
+<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"video":{"url":"http://pfv94oich.bkt.clouddn.com/test.mp4"},"danmaku":{"id":"156411646","api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
 
-        <div id="aplayer-nlXIJHAP" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ZdFauloI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
-        
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-ZdFauloI"),
+            narrow: false,
+            autoplay: false,
+            showlrc: 3,
+            music: {
+              title: "秋绘 - 天ノ弱",
+              author: "Akie",
+              url: "http://pfv94oich.bkt.clouddn.com/Akie.mp3",
+              pic: "http://pfy9cw406.bkt.clouddn.com/mygift.jpg",
+              lrc: "http://pfy9cw406.bkt.clouddn.com//tianruo.lrc/tianruo.lrc"
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
 <p>时间一晃20年就过去了，20岁的年纪，也许是人一生中最具挑战性的时候，六七岁的年纪，还能够无忧无虑的生活着，不用去烦恼那些是是非非，到了三四十岁，也许人生就开始变的平淡了（<del>emmm,拒绝平淡，从我做起</del>）。</p>
 <p>不管怎么说，15-25岁的十年，对任何一个人来说，可能都是最重要的，在这十年中，你需要去确立自己人生观，世界观，价值观，也许能够得到几个真心的朋友，又或者遇到一个能相伴一生的Ta。</p>
 <p>从年少的懵懂无知逐渐到能够独当一面，有太多的过渡发生在这段时间里。当我刚高考完成时，自己还对未来充满了无限的想象，不过，太多的事情仅仅停留在想象的阶段，往往都还是什么都没有做成，到了大二，突然回想起自己大一的一年，貌似什么都没有留下，除了点零零散散的记忆，生活完全和从前一样，完全没有任何的改变。大学一年过去了，突然变的有一点的迷茫，难道四年时间都将要这么度过么？</p>
@@ -626,7 +646,31 @@
     <span title="站点阅读时长">1:17</span>
 
 <div id="days"></div>
-
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("04/17/2018 15:13:14");
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="本站已安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+}
+show_date_time();
+</script>
   
 
 </div>
@@ -681,217 +725,110 @@
 
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  
-  
-    
-  
-
-  
-  
-    
-  
-
-
-  
-
-
-  
-
-  
-
-
-
-  
-  
-
-
-  
-
-  
-
-
-
-  
-  
-
-
-
-
-
-
-
-  
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
-
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
-
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  
-
-
-
-
-
-
-
-
-<script type="text/javascript" src="/bundle.js"></script><script type="text/javascript">CONFIG.page = {
-    sidebar: "",
-  };;(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"video":{"url":"http://pfv94oich.bkt.clouddn.com/test.mp4"},"danmaku":{"id":"156411646","api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})();var ap = new APlayer({
-            element: document.getElementById("aplayer-nlXIJHAP"),
-            narrow: false,
-            autoplay: false,
-            showlrc: 3,
-            music: {
-              title: "秋绘 - 天ノ弱",
-              author: "Akie",
-              url: "http://pfv94oich.bkt.clouddn.com/Akie.mp3",
-              pic: "http://pfy9cw406.bkt.clouddn.com/mygift.jpg",
-              lrc: "http://pfy9cw406.bkt.clouddn.com//tianruo.lrc/tianruo.lrc"
-            }
-          });
-          window.aplayers || (window.aplayers = []);
-          window.aplayers.push(ap);;function show_date_time(){
-    window.setTimeout("show_date_time()", 1000);
-    BirthDay=new Date("04/17/2018 15:13:14");
-    today=new Date();
-    timeold=(today.getTime()-BirthDay.getTime());
-    sectimeold=timeold/1000
-    secondsold=Math.floor(sectimeold);
-    msPerDay=24*60*60*1000
-    e_daysold=timeold/msPerDay
-    daysold=Math.floor(e_daysold);
-    e_hrsold=(e_daysold-daysold)*24;
-    hrsold=setzero(Math.floor(e_hrsold));
-    e_minsold=(e_hrsold-hrsold)*60;
-    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
-    seconds=setzero(Math.floor((e_minsold-minsold)*60));
-    document.getElementById('days').innerHTML="本站已安全运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
-}
-function setzero(i){
-    if (i<10)
-    {i="0" + i};
-    return i;
-}
-show_date_time();;if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
-  };// Popup Window;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe.min.js?v="></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
     var isfetched = false;
     var isXml = true;
     // Search DB path;
@@ -1207,7 +1144,72 @@ show_date_time();;if (Object.prototype.toString.call(window.Promise) !== '[objec
       if (shouldDismissSearchPopup) {
         onPopupClose();
       }
-    });;$('.highlight').each(function (i, e) {
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
       var $wrap = $('<div>').addClass('highlight-wrap')
       $(e).after($wrap)
       $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
@@ -1235,4 +1237,13 @@ show_date_time();;if (Object.prototype.toString.call(window.Promise) !== '[objec
           $b.text('Copy')
         }, 300)
       }).append(e)
-    });InstantClick.init();</script></body></html><!-- 页面点击小红心 -->
+    })
+  </script>
+
+
+
+
+
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body></html><!-- 页面点击小红心 -->

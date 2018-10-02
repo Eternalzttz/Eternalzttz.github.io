@@ -1969,7 +1969,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #2403ff;
+  background: #9eff71;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3119,4 +3119,7 @@ code {
   width: 100%;
   overflow-x: auto;
   vertical-align: bottom;
+}
+#instantclick {
+  display: none;
 }
