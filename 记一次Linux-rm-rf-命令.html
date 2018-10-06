@@ -107,13 +107,24 @@
 
 
 </head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Eternal_zttz">
-<meta property="og:url" content="http://eternalzttz.com/categories/hexo/index.html">
+  <meta name="description" content="早就听说过 rm -rf /* 的鼎鼎大名了，然而这个命令可不能轻易尝试，一不小心整个电脑就将成为一个空壳，所有的文件都将disappear，正好，趁着我们软院硬件基础课我们需要使用Ubuntu 系统来进行上机实验，在上课前来了一把rm -rf /*从删库到跑路操作。 不得不说，体验还是极佳的。">
+<meta name="keywords" content="Linux,命令行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次Linux rm -rf* 命令">
+<meta property="og:url" content="http://eternalzttz.com/记一次Linux-rm-rf-命令.html">
 <meta property="og:site_name" content="Eternal_zttz">
+<meta property="og:description" content="早就听说过 rm -rf /* 的鼎鼎大名了，然而这个命令可不能轻易尝试，一不小心整个电脑就将成为一个空壳，所有的文件都将disappear，正好，趁着我们软院硬件基础课我们需要使用Ubuntu 系统来进行上机实验，在上课前来了一把rm -rf /*从删库到跑路操作。 不得不说，体验还是极佳的。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pfy9cw406.bkt.clouddn.com/1.png">
+<meta property="og:image" content="http://pfy9cw406.bkt.clouddn.com/2.png">
+<meta property="og:image" content="http://pfy9cw406.bkt.clouddn.com/3.png">
+<meta property="og:image" content="http://pfy9cw406.bkt.clouddn.com/4.png">
+<meta property="og:image" content="http://pfy9cw406.bkt.clouddn.com/5.png">
+<meta property="og:updated_time" content="2018-10-06T03:40:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eternal_zttz">
+<meta name="twitter:title" content="记一次Linux rm -rf* 命令">
+<meta name="twitter:description" content="早就听说过 rm -rf /* 的鼎鼎大名了，然而这个命令可不能轻易尝试，一不小心整个电脑就将成为一个空壳，所有的文件都将disappear，正好，趁着我们软院硬件基础课我们需要使用Ubuntu 系统来进行上机实验，在上课前来了一把rm -rf /*从删库到跑路操作。 不得不说，体验还是极佳的。">
+<meta name="twitter:image" content="http://pfy9cw406.bkt.clouddn.com/1.png">
 
 
 
@@ -122,7 +133,7 @@
 
 
 
-  <link rel="canonical" href="http://eternalzttz.com/categories/hexo/">
+  <link rel="canonical" href="http://eternalzttz.com/记一次Linux-rm-rf-命令.html">
 
 
 
@@ -132,7 +143,7 @@
   };
 </script>
 
-  <title>分类: hexo | Eternal_zttz</title>
+  <title>记一次Linux rm -rf* 命令 | Eternal_zttz</title>
   
 
 
@@ -182,7 +193,7 @@
   
 
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/Eternalzttz" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -248,7 +259,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
   </li>
@@ -325,112 +336,299 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>hexo<small>分类</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eternalzttz.com/记一次Linux-rm-rf-命令.html">
 
-      <h3 class="post-title">
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eternal_zttz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eternal_zttz">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/hexo-插入音乐与视频.html" itemprop="url">
-              
-                <span itemprop="name">hexo 插入音乐与视频</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">记一次Linux rm -rf* 命令
+              
+            
+          </h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-03T20:27:02+08:00" content="2018-10-03">
-          10-03
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-05 10:24:54" itemprop="dateCreated datePublished" datetime="2018-10-05T10:24:54+08:00">2018-10-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-06 11:40:06" itemprop="dateModified" datetime="2018-10-06T11:40:06+08:00">2018-10-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">294</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 ≈</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/hexo-next-主题优化.html" itemprop="url">
-              
-                <span itemprop="name">hexo next主题优化，打造个人精致网站</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-29T09:50:08+08:00" content="2018-09-29">
-          09-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <p>早就听说过 <code>rm -rf /*</code> 的鼎鼎大名了，然而这个命令可不能轻易尝试，一不小心整个电脑就将成为一个空壳，所有的文件都将disappear，正好，趁着我们软院硬件基础课我们需要使用Ubuntu 系统来进行上机实验，在上课前来了一把<code>rm -rf /*</code><del>从删库到跑路</del>操作。</p>
+<p><del>不得不说，体验还是极佳的。</del></p>
+<a id="more"></a>
+<p>首先，进入终端，输入 <code>rm -rf /*</code>命令：<br><img src="http://pfy9cw406.bkt.clouddn.com/1.png" alt="1"></p>
+<p>按下回车：我们可以看到，会出现一堆的权限不够的提示：<br><img src="http://pfy9cw406.bkt.clouddn.com/2.png" alt="2"></p>
+<p>好了，既然权限不够，那么我们提升权限，改用<code>sudo</code>命令操作：<br><img src="http://pfy9cw406.bkt.clouddn.com/3.png" alt="3"></p>
+<p>还是会提示有不被允许的操作：<br><img src="http://pfy9cw406.bkt.clouddn.com/4.png" alt="4"></p>
+<p>然而！！！ 过一会后，就会发现，电脑黑屏了！<br><img src="http://pfy9cw406.bkt.clouddn.com/5.png" alt="5"></p>
+<p>没错 ，黑屏，ok,删除结束，重装虚拟机开始:</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #555;font-size:14px;">-------------The End-------------</div>
+    
+</div>
+  
+</div>
+ 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>鼓励作者</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Eternal_zttz 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Eternal_zttz</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://eternalzttz.com/记一次Linux-rm-rf-命令.html" title="记一次Linux rm -rf* 命令">http://eternalzttz.com/记一次Linux-rm-rf-命令.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+            <a href="/tags/命令行/" rel="tag"><i class="fa fa-tag"></i> 命令行</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hexo-插入音乐与视频.html" rel="next" title="hexo 插入音乐与视频">
+                <i class="fa fa-chevron-left"></i> hexo 插入音乐与视频
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+ <div id="gitalk-container"></div>
 
   
 
 
 
-          </div>
-          
 
         </div>
         
@@ -795,6 +993,13 @@ show_date_time();
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe.min.js?v="></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
+
 
   
 
@@ -817,6 +1022,24 @@ show_date_time();
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+
+  
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '80315b572e0c6a8749d0',
+          clientSecret: '2c716771640bd81d72d083c5116e04d3a59d351e',
+          repo: 'Eternalzttz.github.io',
+          owner: 'Eternalzttz',
+          admin: ['Eternalzttz'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
 
 
