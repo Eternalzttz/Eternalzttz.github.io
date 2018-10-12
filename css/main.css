@@ -1969,7 +1969,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #94e7c7;
+  background: #c76726;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2660,7 +2660,7 @@ ul.breadcrumb li+li:last-child {
   width: 240px;
   background: #fff;
   box-shadow: initial;
-  border-radius: 15px;
+  border-radius: 16px;
 }
 @media (min-width: 1200px) {
   .container .header-inner {
@@ -2717,7 +2717,7 @@ ul.breadcrumb li+li:last-child {
   background: #fff;
   min-height: 700px;
   box-shadow: initial;
-  border-radius: 15px;
+  border-radius: 16px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .content-wrap {
@@ -2851,7 +2851,7 @@ ul.breadcrumb li+li:last-child {
   border-bottom-color: #fff;
 }
 .menu .menu-item .badge {
-  border-radius: 15px;
+  border-radius: 16px;
   display: inline-block;
   padding: 2px 5px;
   font-weight: 700;
@@ -2942,7 +2942,7 @@ ul.breadcrumb li+li:last-child {
   color: #555;
   background: #fff;
   box-shadow: initial;
-  border-radius: 15px;
+  border-radius: 16px;
   opacity: 0;
 }
 .sidebar-inner.affix {
