@@ -107,18 +107,18 @@
 
 
 </head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
-  <meta name="description" content="P3371 P3366 【模板】最小生成树洛谷传送门">
+  <meta name="description" content="P3366 【模板】最小生成树洛谷传送门">
 <meta name="keywords" content="洛谷日刷">
 <meta property="og:type" content="article">
 <meta property="og:title" content="洛谷日刷2">
 <meta property="og:url" content="http://eternalzttz.com/洛谷日刷2.html">
 <meta property="og:site_name" content="Eternal_zttz">
-<meta property="og:description" content="P3371 P3366 【模板】最小生成树洛谷传送门">
+<meta property="og:description" content="P3366 【模板】最小生成树洛谷传送门">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-11T14:36:04.000Z">
+<meta property="og:updated_time" content="2018-10-13T14:59:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="洛谷日刷2">
-<meta name="twitter:description" content="P3371 P3366 【模板】最小生成树洛谷传送门">
+<meta name="twitter:description" content="P3366 【模板】最小生成树洛谷传送门">
 
 
 
@@ -392,12 +392,24 @@
                 
               
 
-              <time title="创建时间：2018-10-11 22:18:08 / 修改时间：22:36:04" itemprop="dateCreated datePublished" datetime="2018-10-11T22:18:08+08:00">2018-10-11</time>
+              <time title="创建时间：2018-10-11 22:18:08" itemprop="dateCreated datePublished" datetime="2018-10-11T22:18:08+08:00">2018-10-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-13 22:59:17" itemprop="dateModified" datetime="2018-10-13T22:59:17+08:00">2018-10-13</time>
               
             
           </span>
@@ -449,7 +461,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">875</span>
+                <span title="本文字数">869</span>
               
 
               
@@ -483,7 +495,7 @@
       
 
       
-        <h2 id="P3371-P3366-【模板】最小生成树"><a href="#P3371-P3366-【模板】最小生成树" class="headerlink" title="P3371 P3366 【模板】最小生成树"></a>P3371 P3366 【模板】最小生成树</h2><p><a href="https://www.luogu.org/problemnew/show/P3366" target="_blank" rel="noopener">洛谷传送门</a><br><a id="more"></a><br>AC代码：<br></p><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>{</span></span><br><span class="line">    <span class="keyword">int</span> u,v,w;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Edge&amp;a){</span><br><span class="line">        <span class="keyword">return</span> w&lt;a.w;</span><br><span class="line">    }</span><br><span class="line">}edge[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> fa[<span class="number">5005</span>],n,m;</span><br><span class="line"><span class="keyword">int</span> ans,eu,ev,cnt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">    <span class="keyword">return</span> x==fa[x]? x:find(fa[x]);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span>{</span><br><span class="line">    sort(edge,edge+m);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">        eu=find(edge[i].u); </span><br><span class="line">        ev=find(edge[i].v);</span><br><span class="line">        <span class="keyword">if</span>(eu==ev)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        ans+=edge[i].w;</span><br><span class="line">        fa[ev]=eu;</span><br><span class="line">        <span class="keyword">if</span>(++cnt==n<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        fa[i]=i;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;edge[i].u,&amp;edge[i].v,&amp;edge[i].w);</span><br><span class="line">    kruskal();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+        <h2 id="P3366-【模板】最小生成树"><a href="#P3366-【模板】最小生成树" class="headerlink" title="P3366 【模板】最小生成树"></a>P3366 【模板】最小生成树</h2><p><a href="https://www.luogu.org/problemnew/show/P3366" target="_blank" rel="noopener">洛谷传送门</a><br><a id="more"></a><br>AC代码：<br></p><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>{</span></span><br><span class="line">    <span class="keyword">int</span> u,v,w;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Edge&amp;a){</span><br><span class="line">        <span class="keyword">return</span> w&lt;a.w;</span><br><span class="line">    }</span><br><span class="line">}edge[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> fa[<span class="number">5005</span>],n,m;</span><br><span class="line"><span class="keyword">int</span> ans,eu,ev,cnt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">    <span class="keyword">return</span> x==fa[x]? x:find(fa[x]);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span>{</span><br><span class="line">    sort(edge,edge+m);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">        eu=find(edge[i].u); </span><br><span class="line">        ev=find(edge[i].v);</span><br><span class="line">        <span class="keyword">if</span>(eu==ev)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        ans+=edge[i].w;</span><br><span class="line">        fa[ev]=eu;</span><br><span class="line">        <span class="keyword">if</span>(++cnt==n<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        fa[i]=i;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;edge[i].u,&amp;edge[i].v,&amp;edge[i].w);</span><br><span class="line">    kruskal();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 
       
     </div>
@@ -654,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -820,7 +832,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#P3371-P3366-【模板】最小生成树"><span class="nav-text">P3371 P3366 【模板】最小生成树</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#P3366-【模板】最小生成树"><span class="nav-text">P3366 【模板】最小生成树</span></a></li></ol></div>
             
 
           </div>
@@ -857,7 +869,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">73k</span>
+    <span title="站点总字数">74k</span>
   
 
   
@@ -868,7 +880,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 ≈</span>
     
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">2:04</span>
 
 <div id="days"></div>
 <script>

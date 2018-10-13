@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[洛谷日刷p1144]]></title>
+    <url>%2F%E6%B4%9B%E8%B0%B7%E6%97%A5%E5%88%B7p1144.html</url>
+    <content type="text"><![CDATA[P1144 最短路计数洛谷传送门AC代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465#include &lt;iostream&gt;#include &lt;queue&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#define M 1000005#define N 100005#define INF 99999999#define mod 100003using namespace std;struct node { int u,v,next;};int head[N],len[N],ans[N];bool vis[N];int n,m,cnt,s = 1;void add(node edge[],int u,int v){ edge[cnt]={u,v,head[u]}; head[u] = cnt++;}void SPFA(queue&lt;int&gt;q,node edge[]){ q.push(s); vis[s] = true; for (int i=1;i&lt;=n;i++) len[i] = INF; len[s] = 0; ans[s] = 1; while(!q.empty()){ int u = q.front(); q.pop(); vis[u] = false; for (int i = head[u];i&gt;0;i=edge[i].next){ int v = edge[i].v; if(len[v]&gt; len[u]+1){ len[v] =len[u]+1; ans[v] = ans[u]; if(!vis[v]){ vis[v] =true; q.push(v); } } else if(len[v] == len[u]+1){ ans[v] += ans[u]; ans[v] %= mod; } } }}int main(){ scanf("%d %d",&amp;n,&amp;m); node edge[2*m+1]; cnt = 1; memset(head,0, sizeof(head)); memset(len,0,sizeof(len)); memset(vis,false,sizeof(vis)); queue&lt;int&gt;q; for (int i =1;i&lt;=m;i++){ int u,v; scanf("%d %d",&amp;u,&amp;v); add(edge,u,v); add(edge,v,u); } SPFA(q, edge); for (int i =1;i&lt;=n;i++) printf("%d\n",ans[i]);}]]></content>
+      <categories>
+        <category>洛谷日刷</category>
+      </categories>
+      <tags>
+        <tag>洛谷日刷</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[最小生成树Kruscal算法]]></title>
     <url>%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91Kruscal%E7%AE%97%E6%B3%95.html</url>
     <content type="text"><![CDATA[Kruscal 算法是另一种计算最小生成树的算法。基本算法思想如下： 建立图，其中有n个顶点，m条边。 将所有的边按照权值从小到大排序。 从权值最小的边开始，依次选取边，如果选的边与之前已选的边之间不构成环，那么将此条边加入到最小生成树的集合中，否则，若构成环，跳过该边，选择下一条继续判断。 依次选取边，知道选取到n-1条边，此时所有的边和顶点构成的即是最小生成树。 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include &lt;cstdio&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;#define MaxN 200005 //边的最大数目#define Maxver 5005 //顶点的最大数目struct Edge{ int u,v,w;//u为边的起点，v为边的终点，w为边的权值 bool operator &lt; (const Edge&amp;a)const{//重载小于符号，用于边按照权值排序 return w&lt;a.w; }}edge[MaxN];int fa[Maxver],n,m,ans,eu,ev,cnt;//判断是否构成环的函数，这个函数是为了找到树的根节点，如果新加入的边能够构成环，说明两个点那么u，v之前都在最小生成树里，那么find(u) == find(v),因为根节点相同，否则，新加入的边不构成环。int find(int x){ return x == fa[x]? x:find(fa[x]);}void kruskal(){ sort(edge,edge+m); for( int i=0;i&lt;m;i++){ eu=find(edge[i].u); ev=find(edge[i].v); if(eu==ev)//如果eu==ev说明新加入的边已经构成环了 continue; ans+=edge[i].w; fa[ev]=eu; if(++cnt==n-1) break; }}int main(){ scanf("%d %d",&amp;n,&amp;m); for( int i=1;i&lt;=n;i++) fa[i]=i;//初始化根节点 for( int i=0;i&lt;m;i++){ int u,v,w; scanf("%d %d %d",&amp;u,&amp;v,&amp;w); edge[i] = {u,v,w}; //相当于scanf("%d %d %d",&amp;edge[i].u,&amp;edge[i].v,&amp;edge[i].w); } kruskal(); printf("%d\n",ans); return 0;}]]></content>
@@ -29,7 +40,7 @@
   <entry>
     <title><![CDATA[洛谷日刷2]]></title>
     <url>%2F%E6%B4%9B%E8%B0%B7%E6%97%A5%E5%88%B72.html</url>
-    <content type="text"><![CDATA[P3371 P3366 【模板】最小生成树洛谷传送门AC代码：1234567891011121314151617181920212223242526272829303132333435363738#include &lt;cstdio&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct Edge{ int u,v,w; bool operator &lt; (const Edge&amp;a){ return w&lt;a.w; }}edge[200005];int fa[5005],n,m;int ans,eu,ev,cnt;int find(int x){ return x==fa[x]? x:find(fa[x]);}void kruskal(){ sort(edge,edge+m); for( int i=0;i&lt;m;i++){ eu=find(edge[i].u); ev=find(edge[i].v); if(eu==ev) continue; ans+=edge[i].w; fa[ev]=eu; if(++cnt==n-1) break; }}int main(){ scanf("%d %d",&amp;n,&amp;m); for( int i=1;i&lt;=n;i++) fa[i]=i; for( int i=0;i&lt;m;i++) scanf("%d %d %d",&amp;edge[i].u,&amp;edge[i].v,&amp;edge[i].w); kruskal(); printf("%d",ans); return 0;}]]></content>
+    <content type="text"><![CDATA[P3366 【模板】最小生成树洛谷传送门AC代码：1234567891011121314151617181920212223242526272829303132333435363738#include &lt;cstdio&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;struct Edge{ int u,v,w; bool operator &lt; (const Edge&amp;a){ return w&lt;a.w; }}edge[200005];int fa[5005],n,m;int ans,eu,ev,cnt;int find(int x){ return x==fa[x]? x:find(fa[x]);}void kruskal(){ sort(edge,edge+m); for( int i=0;i&lt;m;i++){ eu=find(edge[i].u); ev=find(edge[i].v); if(eu==ev) continue; ans+=edge[i].w; fa[ev]=eu; if(++cnt==n-1) break; }}int main(){ scanf("%d %d",&amp;n,&amp;m); for( int i=1;i&lt;=n;i++) fa[i]=i; for( int i=0;i&lt;m;i++) scanf("%d %d %d",&amp;edge[i].u,&amp;edge[i].v,&amp;edge[i].w); kruskal(); printf("%d",ans); return 0;}]]></content>
       <categories>
         <category>洛谷日刷</category>
       </categories>
