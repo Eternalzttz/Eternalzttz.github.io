@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="Eternal_zttz">
 <meta property="og:description" content="Kruscal 算法是另一种计算最小生成树的算法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-12T14:10:50.000Z">
+<meta property="og:updated_time" content="2018-10-14T00:40:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最小生成树Kruscal算法">
 <meta name="twitter:description" content="Kruscal 算法是另一种计算最小生成树的算法。">
@@ -392,12 +392,24 @@
                 
               
 
-              <time title="创建时间：2018-10-12 21:34:09 / 修改时间：22:10:50" itemprop="dateCreated datePublished" datetime="2018-10-12T21:34:09+08:00">2018-10-12</time>
+              <time title="创建时间：2018-10-12 21:34:09" itemprop="dateCreated datePublished" datetime="2018-10-12T21:34:09+08:00">2018-10-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-14 08:40:48" itemprop="dateModified" datetime="2018-10-14T08:40:48+08:00">2018-10-14</time>
               
             
           </span>
@@ -495,9 +507,9 @@
 <li>建立图，其中有n个顶点，m条边。</li>
 <li>将所有的边按照权值从小到大排序。</li>
 <li>从权值最小的边开始，依次选取边，如果选的边与之前已选的边之间不构成环，那么将此条边加入到最小生成树的集合中，否则，若构成环，跳过该边，选择下一条继续判断。</li>
-<li>依次选取边，知道选取到n-1条边，此时所有的边和顶点构成的即是最小生成树。</li>
+<li>依次选取边，直到选取到n-1条边，此时所有的边和顶点构成的即是最小生成树。</li>
 </ol>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxN 200005 <span class="comment">//边的最大数目</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Maxver 5005 <span class="comment">//顶点的最大数目</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>{</span></span><br><span class="line">    <span class="keyword">int</span> u,v,w;<span class="comment">//u为边的起点，v为边的终点，w为边的权值</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Edge&amp;a)<span class="keyword">const</span>{<span class="comment">//重载小于符号，用于边按照权值排序</span></span><br><span class="line">        <span class="keyword">return</span> w&lt;a.w;</span><br><span class="line">    }</span><br><span class="line">}edge[MaxN];</span><br><span class="line"><span class="keyword">int</span> fa[Maxver],n,m,ans,eu,ev,cnt;</span><br><span class="line"><span class="comment">//判断是否构成环的函数，这个函数是为了找到树的根节点，如果新加入的边能够构成环，说明两个点那么u，v之前都在最小生成树里，那么find(u) == find(v),因为根节点相同，否则，新加入的边不构成环。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">    <span class="keyword">return</span> x == fa[x]? x:find(fa[x]);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span>{</span><br><span class="line">    sort(edge,edge+m);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">        eu=find(edge[i].u); </span><br><span class="line">        ev=find(edge[i].v);</span><br><span class="line">        <span class="keyword">if</span>(eu==ev)<span class="comment">//如果eu==ev说明新加入的边已经构成环了</span></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        ans+=edge[i].w;</span><br><span class="line">        fa[ev]=eu;</span><br><span class="line">        <span class="keyword">if</span>(++cnt==n<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        fa[i]=i;<span class="comment">//初始化根节点</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">        <span class="keyword">int</span> u,v,w;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;u,&amp;v,&amp;w);</span><br><span class="line">        edge[i] = {u,v,w};</span><br><span class="line">        <span class="comment">//相当于scanf("%d %d %d",&amp;edge[i].u,&amp;edge[i].v,&amp;edge[i].w);</span></span><br><span class="line">    }</span><br><span class="line">    kruskal();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxN 200005 <span class="comment">//边的最大数目</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Maxver 5005 <span class="comment">//顶点的最大数目</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>{</span></span><br><span class="line">    <span class="keyword">int</span> u,v,w;<span class="comment">//u为边的起点，v为边的终点，w为边的权值</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Edge&amp;a)<span class="keyword">const</span>{<span class="comment">//重载小于符号，用于边按照权值排序</span></span><br><span class="line">        <span class="keyword">return</span> w&lt;a.w;</span><br><span class="line">    }</span><br><span class="line">}edge[MaxN];</span><br><span class="line"><span class="keyword">int</span> fa[Maxver],n,m,ans,eu,ev,cnt;</span><br><span class="line"><span class="comment">//判断是否构成环的函数，这个函数是为了找到树的根节点，如果新加入的边能够构成环，说明两个点u，v之前都在最小生成树里，那么find(u) == find(v),因为根节点相同。否则，新加入的边不构成环。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">    <span class="keyword">return</span> x == fa[x]? x:find(fa[x]);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span>{</span><br><span class="line">    sort(edge,edge+m);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">        eu=find(edge[i].u); </span><br><span class="line">        ev=find(edge[i].v);</span><br><span class="line">        <span class="keyword">if</span>(eu==ev)<span class="comment">//如果eu==ev说明新加入的边已经构成环了</span></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        ans+=edge[i].w;</span><br><span class="line">        fa[ev]=eu;</span><br><span class="line">        <span class="keyword">if</span>(++cnt==n<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        fa[i]=i;<span class="comment">//初始化根节点</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">        <span class="keyword">int</span> u,v,w;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;u,&amp;v,&amp;w);</span><br><span class="line">        edge[i] = {u,v,w};</span><br><span class="line">        <span class="comment">//相当于scanf("%d %d %d",&amp;edge[i].u,&amp;edge[i].v,&amp;edge[i].w);</span></span><br><span class="line">    }</span><br><span class="line">    kruskal();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
       
     </div>
@@ -663,7 +675,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -851,7 +863,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">74k</span>
+    <span title="站点总字数">75k</span>
   
 
   
@@ -862,7 +874,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 ≈</span>
     
-    <span title="站点阅读时长">2:04</span>
+    <span title="站点阅读时长">2:05</span>
 
 <div id="days"></div>
 <script>
