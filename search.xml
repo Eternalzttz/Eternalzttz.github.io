@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[STLqueue（1）]]></title>
-    <url>%2FSTLqueue1.html</url>
-    <content type="text"><![CDATA[queue 是c++的一个标准库，这个标准库对队列进行了实现。 标准库使用 ：12#include &lt;queue&gt;using namespace std; 然后再声明需要使用的队列：123queue&lt;int&gt; q; //代表队列里的元素类型为 intqueue&lt;double&gt; q; //代表队列里的元素类型为 doublequeue&lt;string&gt; q; //代表队列里的元素类型为 string queue库函数：在这个库中，主要实现了以下函数： push(): 该函数会将一个函数放入队列中 front(): 该函数会返回queue中的第一个元素，即队首元素 back(): 该函数返回queue中的最后一个元素，即队尾元素 pop(): 该函数移除queue内的第一个元素（队首元素） size(): 该函数会返回queue内的元素个数 empty(): 该函数在队列为空时返回1，否则为0 swap(): 交换两个队列的值 注意，函数front()和back()本身只是访问队列中的元素，并不对该元素作出操作，所以，如果不执行pop()操作，多次访问的值是一样的，不会改变（因为队列并没有改变); 函数使用：示例：12345678910111213141516171819202122232425#include &lt;cstdio&gt;#include &lt;queue&gt; //引入头文件using namespace std;int main(){ int n = 10; int a[n]; queue&lt;int&gt; q;//声明一个int型队列 queue&lt;int&gt; q2; for (int i = 0; i &lt; n; i++){ scanf("%d",&amp;a[i]); q.push(a[i]);//元素入队 // printf("%d\n",q.back());//访问队尾元素 } printf("%ld\n",q.size());//队列元素数目 while(!q.empty()){ printf("%d ",q.front());//访问队首元素 q.pop();//队首出队 } printf("\n"); q.push(1);q.push(2); q2.push(3);q2.push(4);q2.push(5); printf("%ld %ld\n",q.size(),q2.size()); swap(q, q2);//交换两个队列的元素 printf("%ld %ld\n",q.size(),q2.size());}]]></content>
-      <categories>
-        <category>STL</category>
-        <category>queue</category>
-      </categories>
-      <tags>
-        <tag>queue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[STLqueue（1）]]></title>
+    <title><![CDATA[STLqueue（2）]]></title>
     <url>%2FSTLqueue2.html</url>
     <content type="text"><![CDATA[在c++的queue头文件中，还定义了一个重要的数据结构，那就是优先队列priority_queue。 什么是优先队列？顾名思义，那就是队列中的每个元素都会对应一个优先级，具有最高优先级的会放到队首，率先访问。 标准库使用 ：优先队列的引用同普通队列一样：12#include &lt;queue&gt;using namespace std; 然后再声明需要使用的队列：12priority_queue&lt;int&gt; q; //代表优先队列里的元素类型为 intpriority_queue&lt;double&gt; q; //代表优先队列里的元素类型为 double queue库函数：在这个库中，主要实现了以下函数： push(): 该函数会将一个函数放入队列中 top(): 该函数会返回queue中的第一个元素，即队首元素 pop(): 该函数移除queue内的第一个元素（队首元素） size(): 该函数会返回queue内的元素个数 empty(): 该函数在队列为空时返回1，否则为0 swap(): 交换两个队列的值 注意：在使用优先队列的时候，没有front()函数和back()函数，访问优先队列队首时需要使用top()函数，这是和普通队列不同的地方，避免记错混用 优先队列特性使用优先队列的一个好处，那就是可以根据优先级自动排序。我们来看看这个程序：1234567891011121314#include &lt;cstdio&gt;#include &lt;queue&gt;using namespace std;int main(){ priority_queue&lt;int&gt; q; q.push(3);q.push(6); q.push(8);q.push(12); q.push(0); while(q.size()){ printf("%d ",q.top()); q.pop(); } return 0;} 程序的意思就是将3，6，8，12，0入队，我们可以看看输出：12 8 6 3 0很明显，输出的值已经按照从大到小的顺序排好了。默认情况下，优先队列会从大到小的排列元素。 使用less和greater对于优先队列的声明如下：12priority_queue &lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt; p;priority_queue &lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; q; 使用less 表示从大到小排列队中的元素；使用greater 表示从小到大的排列队中的元素。 使用结构体某些时候，我们不仅仅需要对某个单一元素使用优先队列，需要对整个结构体使用优先队列排序，当然，c++是支持这个操作的，我们所需要的，便是要去定义一个小于运算符： 结构体申明如下：12345678910#include &lt;cstdio&gt;#include &lt;queue&gt;using namespace std;struct node{ int a; int b; bool operator &lt; (const node &amp;x) const{//重载小于符号 return b&lt;x.b; }}; 然后声明的时候使用：1priority_queue &lt;node&gt; q; 例题应用最近，Nova君遇到了一件非常棘手的问题。他需要整理非常多的解题报告。每份解题报告的题目数量是不定的。Nova君每次需要将两份报告的题目解析合成到一份里。假设两份报告的题解数分别为a和b，那么合成这两份报告消耗Nova君a+b的hp值。现在有n份报告，题解数分别为a0,a1,a2,,,an-1，请问Nova最少消耗多少hp？ 解题思路 很明显，如果我们需要消耗最少的hp，那么我们需要每次需要合成消耗最小hp的报告，合成后，我们需要将合成的新的一份报告按照新的所需消耗hp值插入到原顺序中，那么，优先队列正好可以帮我们实现这个过程。12345678910111213141516171819202122#include &lt;cstdio&gt;#include &lt;queue&gt;typedef unsigned long long ull;using namespace std;int main(){ int n; while(~scanf("%d",&amp;n)){ ull a,b,c,sum=0 ; priority_queue&lt;ull,vector &lt;ull&gt;,greater&lt;ull&gt;&gt; q; for (int i =0 ;i&lt;n;i++){ scanf("%lld",&amp;a); q.push(a); } while(q.size()&gt;1){ b = q.top();q.pop(); c = q.top();q.pop(); sum+= (b+c); q.push(b+c); } printf("%lld\n",sum); }}]]></content>
       <categories>
@@ -23,6 +11,18 @@
       <tags>
         <tag>queue</tag>
         <tag>优先队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[STLqueue（1）]]></title>
+    <url>%2FSTLqueue1.html</url>
+    <content type="text"><![CDATA[queue 是c++的一个标准库，这个标准库对队列进行了实现。 标准库使用 ：12#include &lt;queue&gt;using namespace std; 然后再声明需要使用的队列：123queue&lt;int&gt; q; //代表队列里的元素类型为 intqueue&lt;double&gt; q; //代表队列里的元素类型为 doublequeue&lt;string&gt; q; //代表队列里的元素类型为 string queue库函数：在这个库中，主要实现了以下函数： push(): 该函数会将一个函数放入队列中 front(): 该函数会返回queue中的第一个元素，即队首元素 back(): 该函数返回queue中的最后一个元素，即队尾元素 pop(): 该函数移除queue内的第一个元素（队首元素） size(): 该函数会返回queue内的元素个数 empty(): 该函数在队列为空时返回1，否则为0 swap(): 交换两个队列的值 注意，函数front()和back()本身只是访问队列中的元素，并不对该元素作出操作，所以，如果不执行pop()操作，多次访问的值是一样的，不会改变（因为队列并没有改变); 函数使用：示例：12345678910111213141516171819202122232425#include &lt;cstdio&gt;#include &lt;queue&gt; //引入头文件using namespace std;int main(){ int n = 10; int a[n]; queue&lt;int&gt; q;//声明一个int型队列 queue&lt;int&gt; q2; for (int i = 0; i &lt; n; i++){ scanf("%d",&amp;a[i]); q.push(a[i]);//元素入队 // printf("%d\n",q.back());//访问队尾元素 } printf("%ld\n",q.size());//队列元素数目 while(!q.empty()){ printf("%d ",q.front());//访问队首元素 q.pop();//队首出队 } printf("\n"); q.push(1);q.push(2); q2.push(3);q2.push(4);q2.push(5); printf("%ld %ld\n",q.size(),q2.size()); swap(q, q2);//交换两个队列的元素 printf("%ld %ld\n",q.size(),q2.size());}]]></content>
+      <categories>
+        <category>STL</category>
+        <category>queue</category>
+      </categories>
+      <tags>
+        <tag>queue</tag>
       </tags>
   </entry>
   <entry>
