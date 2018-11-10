@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[北航算法第三次练习赛-零崎的补番计划Ⅱ]]></title>
     <url>%2FBUAAclass3-1.html</url>
-    <content type="text"><![CDATA[解题思路这一题就是一道裸的01背包问题，直接套用01背包模版即可。状态转移方程为：12if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; 时间复杂度为 AC代码123456789101112131415161718192021#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, 0, sizeof(f)); for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; } } printf("%d\n",f[t]); }}]]></content>
+    <content type="text"><![CDATA[致敬DP 解题思路这一题就是一道裸的01背包问题，直接套用01背包模版即可。状态转移方程为：12if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; 时间复杂度为 AC代码123456789101112131415161718192021#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, 0, sizeof(f)); for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; } } printf("%d\n",f[t]); }}]]></content>
       <categories>
         <category>算法</category>
       </categories>
