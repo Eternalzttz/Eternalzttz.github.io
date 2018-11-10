@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="Eternal_zttz">
 <meta property="og:description" content="致敬DP">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-10T07:50:06.000Z">
+<meta property="og:updated_time" content="2018-11-10T15:22:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="北航算法第三次练习赛-零崎的补番计划Ⅱ">
 <meta name="twitter:description" content="致敬DP">
@@ -392,7 +392,7 @@
                 
               
 
-              <time title="创建时间：2018-11-10 14:20:20 / 修改时间：15:50:06" itemprop="dateCreated datePublished" datetime="2018-11-10T14:20:20+08:00">2018-11-10</time>
+              <time title="创建时间：2018-11-10 14:20:20 / 修改时间：23:22:24" itemprop="dateCreated datePublished" datetime="2018-11-10T14:20:20+08:00">2018-11-10</time>
             
 
             
@@ -485,7 +485,7 @@
       
         <p>致敬DP</p>
 <a id="more"></a>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这一题就是一道裸的01背包问题，直接套用01背包模版即可。<br>01背包是最基础的背包问题，特点是：每种物品仅有一件，可以选择放或不放。<br>如果我们用子问题来定义状态：即f[i,j]表示前i件物品恰好放入一个容量为j的背包可以获得的最大价值。那么它的状态转移方程便是：</p>
+<h2 id="1-解题思路"><a href="#1-解题思路" class="headerlink" title="1. 解题思路"></a>1. 解题思路</h2><p>这一题就是一道裸的01背包问题，直接套用01背包模版即可。<br>01背包是最基础的背包问题，特点是：每种物品仅有一件，可以选择放或不放。<br>如果我们用子问题来定义状态：即f[i,j]表示前i件物品恰好放入一个容量为j的背包可以获得的最大价值。那么它的状态转移方程便是：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f[i,j] = max(f[i<span class="number">-1</span>,j],f[i<span class="number">-1</span>,j-w[i]]+ v[i]);</span><br></pre></td></tr></tbody></table></figure>
 <p>这个状态转移方程是最基本的背包转移方程。它所表达的意思便是：</p>
 <p>我们要求把i个物品放到容量为j的背包中这个问题，如果只考虑第i件物品（要么放，要么不放），那么就可以转化为一个只和前i-1件物品相关的问题。如果不放第i件物品，那么问题就变成了“前i-1件物品放入容量为j的背包中”，价值为F[i-1][j];如果放第i件物品，那么问题就转化为“前i-1件物品放入容量为j-w[i]的背包中”，此时得到的最大价值就是F[i-1,j-w[i]],再加上通过放入第i件物品获得的价值v[i].</p>
@@ -531,7 +531,8 @@
  <use xlink:href="#E2-MJMAIN-29" x="2207" y="0"></use>
 </g>
 </svg></span></p>
-<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">310</span>][<span class="number">20010</span>],w[<span class="number">500</span>],v[<span class="number">500</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="keyword">int</span> t,k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;t,&amp;k)){</span><br><span class="line">        <span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">        <span class="built_in">memset</span>(w,<span class="number">0</span>,<span class="keyword">sizeof</span>(w));</span><br><span class="line">        <span class="built_in">memset</span>(v,<span class="number">0</span>,<span class="keyword">sizeof</span>(v));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;v[i],&amp;w[i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++){</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= w[i] <span class="number">-1</span> ; j++)</span><br><span class="line">               f[i][j] =f[i<span class="number">-1</span>][j];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = w[i];j &lt;= t; j++)</span><br><span class="line">                f[i][j] =max(f[i<span class="number">-1</span>][j],f[i<span class="number">-1</span>][j-w[i]]+v[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[k][t]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>##2.  AC代码 ##</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">310</span>][<span class="number">20010</span>],w[<span class="number">500</span>],v[<span class="number">500</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="keyword">int</span> t,k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;t,&amp;k)){</span><br><span class="line">        <span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">        <span class="built_in">memset</span>(w,<span class="number">0</span>,<span class="keyword">sizeof</span>(w));</span><br><span class="line">        <span class="built_in">memset</span>(v,<span class="number">0</span>,<span class="keyword">sizeof</span>(v));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;v[i],&amp;w[i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++){</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= w[i] <span class="number">-1</span> ; j++)</span><br><span class="line">               f[i][j] =f[i<span class="number">-1</span>][j];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = w[i];j &lt;= t; j++)</span><br><span class="line">                f[i][j] =max(f[i<span class="number">-1</span>][j],f[i<span class="number">-1</span>][j-w[i]]+v[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[k][t]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>空间优化：<br></p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">20010</span>;</span><br><span class="line"><span class="keyword">int</span> v[N],w[N],f[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="keyword">int</span> t,k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;t,&amp;k)){</span><br><span class="line">        <span class="built_in">memset</span>(v, <span class="number">0</span>, <span class="keyword">sizeof</span>(v));</span><br><span class="line">        <span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="keyword">sizeof</span>(w));</span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="keyword">sizeof</span>(f));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;v[i],&amp;w[i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;k;i++){</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = t;j&gt;=w[i];j--){</span><br><span class="line">                f[j] = max(f[j],f[j-w[i]]+v[i]);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[t]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
 
       
@@ -615,8 +616,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/BUAAtest2.html" rel="next" title="北航算法第二次上机题解">
-                <i class="fa fa-chevron-left"></i> 北航算法第二次上机题解
+              <a href="/BUAAclass3-3.html" rel="next" title="北航算法第三次练习赛-零崎的朋友很多Ⅱ">
+                <i class="fa fa-chevron-left"></i> 北航算法第三次练习赛-零崎的朋友很多Ⅱ
               </a>
             
           </div>
@@ -701,7 +702,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -873,7 +874,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC代码"><span class="nav-text">AC代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-解题思路"><span class="nav-text">1. 解题思路</span></a></li></ol></div>
             
 
           </div>
@@ -910,7 +911,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">111k</span>
+    <span title="站点总字数">113k</span>
   
 
   
@@ -921,7 +922,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 ≈</span>
     
-    <span title="站点阅读时长">3:05</span>
+    <span title="站点阅读时长">3:09</span>
 
 <div id="days"></div>
 <script>
