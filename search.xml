@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[二分法的变式]]></title>
+    <url>%2Fbsearch.html</url>
+    <content type="text"><![CDATA[二分虽然看上去简单，写代码感觉上也很简单，然而实际上真的没有那么简单～1234567891011121314//查找keyint search1(int arr[], int n, int key){ int left = 0, right = n-1; while(left &lt;= right){ int mid = (left+right) / 2; if(arr[mid] &gt; key) right = mid - 1; else if(arr[mid] &lt; key) left = mid + 1; else if(arr[mid] == key) return mid; } return -1;} 1234567891011121314//查找第一个与key相等的元素int search2(int arr[],int n, int key){ int left = 0, right = n -1; while(left &lt;= right){ int mid = (left + right) /2; if(arr[mid] &gt;= key) right = mid - 1; else if(arr[mid] &lt; key) left = mid + 1; } if(left &lt; n &amp;&amp; arr[left] == key) return left; return -1;} 1234567891011121314//查找最后一个与key相等的元素int search3(int arr[],int n,int key){ int left = 0, right = n -1; while(left &lt;= right){ int mid = (left + right) / 2; if(arr[mid] &gt; key) right = mid - 1; else left = mid + 1; } if(right &gt;=0 &amp;&amp;arr[right] == key) return right; return -1;} 123456789101112//查找第一个大于或等于key的元素int search4(int arr[], int n, int key){ int left = 0, right = n -1; while(left &lt;= right){ int mid = (left + right) /2; if(arr[mid] &gt;= key) right = mid - 1; else left = mid + 1; } return left;} 123456789101112//查找第一个大于key的元素int search5(int arr[],int n, int key){ int left = 0, right = n - 1; while(left &lt;= right){ int mid = (left + right) /2 ; if(arr[mid] &gt; key) right = mid - 1; else left = mid + 1; } return left;} 123456789101112//查找最后一个小于等于key的元素int search6(int arr[], int n, int key){ int left = 0, right = n - 1; while(left &lt;= right){ int mid = (left + right) / 2; if(arr[mid] &gt; key) right = mid -1; else left = mid +1; } return right;} 123456789101112//查找最后一个小于key的元素int search7(int arr[],int n, int key){ int left = 0 ,right = n -1 ; while(left &lt;= right){ int mid = (left + right) /2; if(arr[mid] &gt;= key) right = mid - 1; else left = mid + 1; } return right;} 算法真是博大精深]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>二分</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[北航算法第三次练习赛- DP大作战—多重背包]]></title>
     <url>%2FBUAAclass3-4.html</url>
     <content type="text"><![CDATA[致敬DP 解题思路这是一道多重背包的模版题，多重背包和完全背包问题很类似，基本的方程只需将完全背包问题的方程略微改改即可。 我们可以看到，对于第i种物品如果件数为num[i],那么便有num[i]+1种策略：取0件，取1件…..取num[i]件。令f[i,j]表示前i种物品恰好放入一个容量为j的背包的最大价值，那么状态转移方程即为：1f[i,j] = max(f[i-1,j-k*w[i]]+k*v[i]) (0&lt;=k&lt;=num[i]) 这种写法可能比较难以想到，实际上，对于多重背包而言，我们依旧可以使用01背包的方式来编写代码：即把第i种物品换成num[i]件01背包的物品，直接求解即可。 使用01背包的想法当然可以求解，然而，对于时间复杂度而言，使用01背包显然并没有提升，那么可不可以如完全背包一样降低时间复杂度呢？ 当然是可以，我们考虑二进制的思想，把第i种物品换成若干件01背包中的物品，其中每件物品有一个系数，这件物品的费用和价值均是原来的费用和价值乘以这个系数。令这些系数分别为1，2，2^2,…..2^(k-1),num[i] - 2^k+1,且k是满足num[i] - 2^k +1&gt;0的最大整数。例如，如果num[i] = 13,那么这种最多取13件的物品应被分成系数分别为1，2，4，6的四件物品。 使用这种方式的好处就在于，我们大大减少了分配物品的数量，假如是一件一件分配的话，那么很明显需要13件，然而现在只需要4件，时间复杂度可以大大减低。 另外，我们同时也保证的代码的正确性，使用这种方式我们可以覆盖0…num[i]之间的任何一个整数，无论最终我们采取的是选择这种物品几件，都会有一个答案。正确性的证明可以分为0….2^k-1 和 2^k…num[i]两段考虑，在这里不做累赘。 那么核心代码便是：1234567891011121314void mutil(int weight,int value,int count){ int k; if(weight*count &gt;=x){//如果大于，这里便可以当成完全背包考虑。 complete(weight, value); return; } k = 1; while(k&lt;count){//对系数为2^n的项进行01背包 zero(k*weight, k*value); count -= k ; k *= 2; } zero(weight*count, value*count);//对最后一项进行01背包} 具体代码可看下方： AC 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &lt;algorithm&gt;using namespace std;#define M 1000010#define N 1000int v[N],w[N],c[N],f[M],x;void zero(int weight,int value){ for (int j = x;j&gt;=weight;j--) f[j] = max(f[j],f[j-weight]+value);}void complete(int weight,int value){ for (int j = weight;j&lt;=x;j++) f[j] = max(f[j],f[j-weight]+value);}void mutil(int weight,int value,int count){ int k; if(weight*count &gt;=x){ complete(weight, value); return; } k = 1; while(k&lt;count){ zero(k*weight, k*value); count -= k ; k *= 2; } zero(weight*count, value*count);}int main(){ int n,num; scanf("%d",&amp;n); while(n --){ scanf("%d %d",&amp;x,&amp;num); for (int i = 0;i&lt;num;i++) scanf("%d %d %d",&amp;v[i],&amp;w[i],&amp;c[i]); for (int k = 0;k&lt;num;k++) mutil(w[k], v[k], c[k]); printf("%d\n",f[x]); } return 0;}]]></content>
@@ -25,9 +34,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[北航算法第三次练习赛-零崎的朋友很多Ⅱ]]></title>
-    <url>%2FBUAAclass3-3.html</url>
-    <content type="text"><![CDATA[致敬DP 解题思路同样，这也是一道01背包问题，所不同的是，它需要最后是分文不剩，即相当于最终的结果是背包需要完全放满，对于这种问题，我们只需要对初始化做一点小小的改变，即除了f[0] = 0外，其它f[]数组值均设置为-1，这样，我们就可以保证f[v]为恰好装满背包时的最优解。 这是为什么呢，我们可以这样考虑：初始化的f[]数组事实上对应的就是在没有任何物品可以放入背包时的合法状态，如果要求背包恰好装满，那么此时只有容量为0的背包可以在什么都不装且价值为0的情况下被“恰好装满”，其它情况都没有合法的解，所以我们可以把他们看作未定义的状态。 AC代码123456789101112131415161718192021222324#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, -1, sizeof(f)); f[0] = 0; for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ if(f[j]&lt;f[j-w[i]]+v[i]&amp;&amp;f[j-w[i]]!=-1) f[j] = f[j-w[i]]+v[i]; } } if(f[t] == -1) printf("jpx\n"); else printf("%d\n",f[t]); }}]]></content>
+    <title><![CDATA[北航算法第三次练习赛-零崎的朋友很多Ⅰ]]></title>
+    <url>%2FBUAAclass3-2.html</url>
+    <content type="text"><![CDATA[致敬DP 1. 解题思路这是一道完全背包问题，非常类似于01背包问题，不同的地方在于每种物品有无限件，也就是说，从每种物品的角度考虑，与它相关的策略已并非取或是不取，而是有取0件，取1件，取2件….直到取V/w[i]件等许多种。 如果仍然按照01背包时的思路，令F[i,j]表示前i种物品恰放入一个容量为v的背包的最大权值。那么可以按照每种物品不同的策略写出状态转移方程：1f[i,j] = max(f[i-1,v-kw[i]+kw[i]) (0&lt;=kw[i]&lt;=v) 这和01背包问题一样有O(VN)个状态需要求解，但是求解每个状态的时间已经不是常数了，对于状态f[i][j]而言，求解的时间是O(v/w[i]),时间复杂度大于O(VN) 其实，对于完全背包，最容易想到的做法 便是将它转化成01背包求解。我们考虑到第i种物品最多选V/w[i]件，那么我们完全可以把第i种物品转化为[V/w[i]]件费用及价值均不变的物品，然后求解这个01背包问题。这虽然没有降低它的时间复杂度，但是，确能够有一个清晰的方法来求解问题。 完全背包的优化：和01背包一样，完全背包也可以使用一维数组来求解：我们来看看核心代码：123456for (int i = 0;i&lt;k;i++){ for (int j = w[i];j&lt;=t;j++){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; }} 稍加观察我们就可以发现，和01背包唯一不同的是对V遍历时变为正序。 01背包中逆序是因为F[i][]只和F[i-1][]有关，且第i件的物品加入不会对F[i-1][]状态造成影响。而完全背包则考虑的是第i种物品的出现的问题，第i种物品一旦出现它势必应该对第i种物品还没出现的各状态造成影响。 也就是说，原来没有第i种物品的情况下可能有一个最优解，现在第i种物品出现了，而它的加入有可能得到更优解，所以之前的状态需要进行改变，故需要正序。 2. AC代码123456789101112131415161718192021#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, 0, sizeof(f)); for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = w[i];j&lt;=t;j++){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; } } printf("%d\n",f[t]); }}]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -37,9 +46,21 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[北航算法第三次练习赛-零崎的朋友很多Ⅰ]]></title>
-    <url>%2FBUAAclass3-2.html</url>
-    <content type="text"><![CDATA[致敬DP 1. 解题思路这是一道完全背包问题，非常类似于01背包问题，不同的地方在于每种物品有无限件，也就是说，从每种物品的角度考虑，与它相关的策略已并非取或是不取，而是有取0件，取1件，取2件….直到取V/w[i]件等许多种。 如果仍然按照01背包时的思路，令F[i,j]表示前i种物品恰放入一个容量为v的背包的最大权值。那么可以按照每种物品不同的策略写出状态转移方程：1f[i,j] = max(f[i-1,v-kw[i]+kw[i]) (0&lt;=kw[i]&lt;=v) 这和01背包问题一样有O(VN)个状态需要求解，但是求解每个状态的时间已经不是常数了，对于状态f[i][j]而言，求解的时间是O(v/w[i]),时间复杂度大于O(VN) 其实，对于完全背包，最容易想到的做法 便是将它转化成01背包求解。我们考虑到第i种物品最多选V/w[i]件，那么我们完全可以把第i种物品转化为[V/w[i]]件费用及价值均不变的物品，然后求解这个01背包问题。这虽然没有降低它的时间复杂度，但是，确能够有一个清晰的方法来求解问题。 完全背包的优化：和01背包一样，完全背包也可以使用一维数组来求解：我们来看看核心代码：123456for (int i = 0;i&lt;k;i++){ for (int j = w[i];j&lt;=t;j++){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; }} 稍加观察我们就可以发现，和01背包唯一不同的是对V遍历时变为正序。 01背包中逆序是因为F[i][]只和F[i-1][]有关，且第i件的物品加入不会对F[i-1][]状态造成影响。而完全背包则考虑的是第i种物品的出现的问题，第i种物品一旦出现它势必应该对第i种物品还没出现的各状态造成影响。 也就是说，原来没有第i种物品的情况下可能有一个最优解，现在第i种物品出现了，而它的加入有可能得到更优解，所以之前的状态需要进行改变，故需要正序。 2. AC代码123456789101112131415161718192021#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, 0, sizeof(f)); for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = w[i];j&lt;=t;j++){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; } } printf("%d\n",f[t]); }}]]></content>
+    <title><![CDATA[北航算法第三次练习赛- DP大作战—组合背包]]></title>
+    <url>%2FBUAAclass3-5.html</url>
+    <content type="text"><![CDATA[致敬DP 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &lt;algorithm&gt;using namespace std;#define M 1000010#define N 1000int v[N],w[N],c[N],f[M],x;void zero(int weight,int value){ for (int j = x;j&gt;=weight;j--) f[j] = max(f[j],f[j-weight]+value);}void complete(int weight,int value){ for (int j = weight;j&lt;=x;j++) f[j] = max(f[j],f[j-weight]+value);}void mutil(int weight,int value,int count){ int k; if(weight*count &gt;=x){ complete(weight, value); return; } k = 1; while(k&lt;count){ zero(k*weight, k*value); count -= k ; k*=2; } zero(weight*count, value*count);}int main(){ int n,num; scanf("%d",&amp;n); while(n --){ scanf("%d %d",&amp;x,&amp;num); for (int i = 0;i&lt;num;i++) scanf("%d %d %d",&amp;v[i],&amp;w[i],&amp;c[i]); for (int k = 0;k&lt;num;k++){ if(c[k] == 233) complete(w[k], v[k]); else mutil(w[k], v[k], c[k]); } printf("%d\n",f[x]); } return 0;}]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>北航</tag>
+        <tag>算法上机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[北航算法第三次练习赛-零崎的朋友很多Ⅱ]]></title>
+    <url>%2FBUAAclass3-3.html</url>
+    <content type="text"><![CDATA[致敬DP 解题思路同样，这也是一道01背包问题，所不同的是，它需要最后是分文不剩，即相当于最终的结果是背包需要完全放满，对于这种问题，我们只需要对初始化做一点小小的改变，即除了f[0] = 0外，其它f[]数组值均设置为-1，这样，我们就可以保证f[v]为恰好装满背包时的最优解。 这是为什么呢，我们可以这样考虑：初始化的f[]数组事实上对应的就是在没有任何物品可以放入背包时的合法状态，如果要求背包恰好装满，那么此时只有容量为0的背包可以在什么都不装且价值为0的情况下被“恰好装满”，其它情况都没有合法的解，所以我们可以把他们看作未定义的状态。 AC代码123456789101112131415161718192021222324#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, -1, sizeof(f)); f[0] = 0; for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ if(f[j]&lt;f[j-w[i]]+v[i]&amp;&amp;f[j-w[i]]!=-1) f[j] = f[j-w[i]]+v[i]; } } if(f[t] == -1) printf("jpx\n"); else printf("%d\n",f[t]); }}]]></content>
       <categories>
         <category>算法</category>
       </categories>
