@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[北航算法第三次练习赛-AlvinZH叒掉坑里了]]></title>
+    <url>%2FBUAAclass-8.html</url>
+    <content type="text"><![CDATA[致敬DP 1. 解题思路这一题和上一题十分相似,我们可以把问题简化为:将n个金币放入至多m个盒子中,不存在相等数量金币的盒子. dp[i][j]：将i个金币放入j个盒子的方法数。本题同样可以沿用上一题思想，把答案分成两部分。但是有一个问题是不能有相同数量金币的盒子，如果像上一题一样处理，我们会出现多个1的情况，需要避免这些情况。 放完之后所有盒子金币数量大于1 放完之后只有一个盒子金币数量为1 这样分可以保证不会有重复计算,而且不会有相同的情况.状态转移方程为:1dp[i][j]=dp[i−j][j]+dp[i−j][j−1] ① dp[i−j][j] : 将(i-j)个金币放到j个盒子,然后这j个盒子每个再放1个金币.表示的是将j个金币分成所有盒子金币数量大于1的方案总数. ② dp[i−j][j−1] : 将(i-j)个金币放到j-1个盒子中去,然后这(j-1)个盒子每个再放1个金币,最后剩下的一个盒子放一个金币.表示的是将j个金币分成至少一个盒子为1的情况. 对比上一题而言,状态转移方程仅仅差了一个字符. 需要注意的是,如果使用dp[50005][50005]是会MLE的,由于本题要求分成不同的数目，1+2+3+…+m=n，于是dp数组变成dp[50005][350]。 优化:我们可以发现，dp[i][j]只与dp[][j]和dp[][j-1]有关，那么这里可以对空间再次优化，dp数组变为dp[50005][2] 2. AC代码1234567891011121314151617181920212223#include &lt;cstdio&gt;#include &lt;cstring&gt;#define MOD 1000007int n;int dp[50005][350];int main(){ while(~scanf("%d", &amp;n)){ memset(dp, 0, sizeof(dp)); dp[0][0] = 1; int ans = 0; for (int i = 1; i &lt; 350; ++i) { for (int j = 0; j &lt;= n; ++j){ if(j - i &gt;= 0) dp[j][i] = (dp[j-i][i] + dp[j-i][i-1]) % MOD; } ans = (ans + dp[n][i]) % MOD; } printf("%d\n", ans); }} 优化:123456789101112131415161718192021222324252627#include &lt;cstdio&gt;#include &lt;cstring&gt;#define MOD 1000007int n;int dp[50005][2];int main(){ while(~scanf("%d", &amp;n)){ memset(dp, 0, sizeof(dp)); dp[0][0] = 1; int ans = 0; for (int i = 1; i &lt; 350; ++i) { for (int j = 0; j &lt; 350; ++j) dp[j][i&amp;1] = 0; for (int j = 0; j &lt;= n; ++j) { if (j - i &gt;= 0) dp[j][i&amp;1] = (dp[j - i][i&amp;1] + dp[j - i][(i - 1)&amp;1]) % MOD; } ans = (ans + dp[n][i&amp;1]) % MOD; } printf("%d\n", ans); }}]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>北航</tag>
+        <tag>算法上机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[北航算法第三次练习赛-AlvinZH双掉坑里了]]></title>
+    <url>%2FBUAAclass-7.html</url>
+    <content type="text"><![CDATA[致敬DP 1. 解题思路这道题的难度在于如何找到明确状态的过程,题目要求是不允许有空的背包,那么我们可以这样来思考问题: 存在至少一个背包装的金币数为1 每个背包装的金币数都大于1 这样分的话可以保证不会有重复的计算出现,那么状态转移方程便是:1f[i][j] = (f[i-j][j]+f[i-1][j-1]); 我们来看看代码表示的意思:①f[i−j][j]：将(i-j)个金币放到j个盒子，然后这j个盒子每个再放1个金币。表示的是将i个金币分成所有盒子金币数量大于1的方案总数。例如，求9分解成3份，6（9-3）分成3份可以分为{1,1,4}{1,2,3}{2,2,2}，则9可以分为{2,2,5}{2,3,4}{3,3,3}，共3种。 ②f[i−1][j−1] ：将(i-1)个金币放到(j-1)个盒子，再来一个盒子放1个。表示的是将i个金币分成至少有一个盒子金币数量为1的方案总数。例如，求9分解成3份，8（9-1）分成2份可以分为{1,7}{2,6}{3,5}{4,4}，则9可以分为{1,1,7}{1,2,6}{1,3,5}{1,4,4}，共4种。 分类有难度,%AlvinZH. 2. AC代码1234567891011121314151617181920#include &lt;cstdio&gt;#include &lt;cstring&gt;#define N 1000007int n,m;int f[10010][1010];int main(){ while(~scanf("%d %d",&amp;n,&amp;m)){ memset(f, 0, sizeof(f)); f[0][0] = 1; for (int i = 1;i&lt;=n;i++){ for (int j = 1;j&lt;=m;j++){ if(i - j &gt;=0) f[i][j] = (f[i-j][j]+f[i-1][j-1])%N; } } printf("%d\n",f[n][m]); }} blog参考:https://www.cnblogs.com/AlvinZH/p/7840604.html]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>北航</tag>
+        <tag>算法上机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[AlvinZH过生日]]></title>
     <url>%2FBUAAclass3-6.html</url>
     <content type="text"><![CDATA[致敬DP 1. 解题思路逆推DP. 解这道题的关键就在于dp的状态只和是否有选择权有关，而与选择权在谁手里无关。注意无论选择权在谁手里，他都会尽可能的获得最大的蛋糕重量。 dp[i]表示分配到第i个物品为止，当前拥有选择权的人能获得的最大蛋糕重量，即蛋糕[i~n]的最大值。以有选择权的的人列一个转移方程。因为我们只知道初始选择的是AlvinZH，因此我们要逆推： f[i] = max(f[i+1], sum - f[i+1] + vl[i]);//max(不吃， 吃) 其中sum为[i+1~n]蛋糕总质量。如果不吃第i块蛋糕，那么自己仍然保留选择权，那么f[i] = f[i+1],如果选择吃了第i块，那么自己在接下来的蛋糕中，便只能吃sum- f[i+1]的值，所以f[i] = sum - f[i+1] + v[i]; 最后dp[1]就是AlvinZH获得的最大价值。 注意： 注释里的吃与不吃并不是一直针对同一个人的，指的是当前有选择权的人对当前蛋糕吃与不吃。 整个过程没有管AlvinZH吃还是不吃，针对的对象是有选择权的那个人。 2. AC代码123456789101112131415161718192021#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;using namespace std;int n;int sum;int v[110],f[110];int main(){ while(~scanf("%d",&amp;n)){ sum = 0; memset(f, 0, sizeof(f)); for (int i = 1;i&lt;=n;i++) scanf("%d",&amp;v[i]); for (int i = n;i&gt;=1;i--){ f[i] = max(f[i+1],sum-f[i+1]+v[i]); sum += v[i]; } printf("%d\n",f[1]); }}]]></content>
@@ -34,9 +58,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[北航算法第三次练习赛-零崎的朋友很多Ⅱ]]></title>
-    <url>%2FBUAAclass3-3.html</url>
-    <content type="text"><![CDATA[致敬DP 解题思路同样，这也是一道01背包问题，所不同的是，它需要最后是分文不剩，即相当于最终的结果是背包需要完全放满，对于这种问题，我们只需要对初始化做一点小小的改变，即除了f[0] = 0外，其它f[]数组值均设置为-1，这样，我们就可以保证f[v]为恰好装满背包时的最优解。 这是为什么呢，我们可以这样考虑：初始化的f[]数组事实上对应的就是在没有任何物品可以放入背包时的合法状态，如果要求背包恰好装满，那么此时只有容量为0的背包可以在什么都不装且价值为0的情况下被“恰好装满”，其它情况都没有合法的解，所以我们可以把他们看作未定义的状态。 AC代码123456789101112131415161718192021222324#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, -1, sizeof(f)); f[0] = 0; for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ if(f[j]&lt;f[j-w[i]]+v[i]&amp;&amp;f[j-w[i]]!=-1) f[j] = f[j-w[i]]+v[i]; } } if(f[t] == -1) printf("jpx\n"); else printf("%d\n",f[t]); }}]]></content>
+    <title><![CDATA[北航算法第三次练习赛-零崎的补番计划Ⅱ]]></title>
+    <url>%2FBUAAclass3-1.html</url>
+    <content type="text"><![CDATA[致敬DP 1. 解题思路这一题就是一道裸的01背包问题，直接套用01背包模版即可。01背包是最基础的背包问题，特点是：每种物品仅有一件，可以选择放或不放。如果我们用子问题来定义状态：即f[i,j]表示前i件物品恰好放入一个容量为j的背包可以获得的最大价值。那么它的状态转移方程便是： 1f[i,j] = max(f[i-1,j],f[i-1,j-w[i]]+ v[i]); 这个状态转移方程是最基本的背包转移方程。它所表达的意思便是： 我们要求把i个物品放到容量为j的背包中这个问题，如果只考虑第i件物品（要么放，要么不放），那么就可以转化为一个只和前i-1件物品相关的问题。如果不放第i件物品，那么问题就变成了“前i-1件物品放入容量为j的背包中”，价值为F[i-1][j];如果放第i件物品，那么问题就转化为“前i-1件物品放入容量为j-w[i]的背包中”，此时得到的最大价值就是F[i-1,j-w[i]],再加上通过放入第i件物品获得的价值v[i]. 核心代码如下：123456 for (int i = 1; i &lt;= k; i++){ for (int j = 1; j &lt;= w[i] -1 ; j++) f[i][j] =f[i-1][j]; for (int j = w[i];j &lt;= t; j++) f[i][j] =max(f[i-1][j],f[i-1][j-w[i]]+v[i]);} 时间复杂度为 空间优化：通过观察我们可以发现，求解第i个子问题，它只和第 i-1个子问题有关，和之前的问题没有直接的关系，那么，毫无疑问，使用二维数组我们会浪费很多的空间。在这里，我们可以使用滚动数组将二维转化为一维数组求解。 注意这时候我们需要逆序循环第二维。 为什么呢？我们想想f[]数组的意义：在某个i下，f[j]表示的是当前背包容量为j时的最大值，所以在我们开始循环i时，由于还未开始循环，此时f[i]保存的是前一次 i -1 时背包的价值，即此时f[j]对应于f[i-1][j]],那么很明显：我们求解时：f[j] = max(f[j],f[j-w[i]]+v[i]);对应的就是：f[i][j] =max(f[i-1][j],f[i-1][j-w[i]]+v[i]); 核心代码为： 12345 for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ f[j] = max(f[j],f[j-w[i]]+v[i]); }} 时间复杂度为 ##2. AC代码 ## 12345678910111213141516171819202122#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;using namespace std;int f[310][20010],w[500],v[500];int main(){ int t,k; while(~scanf("%d%d",&amp;t,&amp;k)){ memset(f,0,sizeof(f)); memset(w,0,sizeof(w)); memset(v,0,sizeof(v)); for (int i = 1; i &lt;= k; i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 1; i &lt;= k; i++){ for (int j = 1; j &lt;= w[i] -1 ; j++) f[i][j] =f[i-1][j]; for (int j = w[i];j &lt;= t; j++) f[i][j] =max(f[i-1][j],f[i-1][j-w[i]]+v[i]); } printf("%d\n",f[k][t]); }} 空间优化：12345678910111213141516171819202122#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;using namespace std;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, 0, sizeof(f)); for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ f[j] = max(f[j],f[j-w[i]]+v[i]); } } printf("%d\n",f[t]); }}]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -46,9 +70,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[北航算法第三次练习赛-零崎的朋友很多Ⅰ]]></title>
-    <url>%2FBUAAclass3-2.html</url>
-    <content type="text"><![CDATA[致敬DP 1. 解题思路这是一道完全背包问题，非常类似于01背包问题，不同的地方在于每种物品有无限件，也就是说，从每种物品的角度考虑，与它相关的策略已并非取或是不取，而是有取0件，取1件，取2件….直到取V/w[i]件等许多种。 如果仍然按照01背包时的思路，令F[i,j]表示前i种物品恰放入一个容量为v的背包的最大权值。那么可以按照每种物品不同的策略写出状态转移方程：1f[i,j] = max(f[i-1,v-kw[i]+kw[i]) (0&lt;=kw[i]&lt;=v) 这和01背包问题一样有O(VN)个状态需要求解，但是求解每个状态的时间已经不是常数了，对于状态f[i][j]而言，求解的时间是O(v/w[i]),时间复杂度大于O(VN) 其实，对于完全背包，最容易想到的做法 便是将它转化成01背包求解。我们考虑到第i种物品最多选V/w[i]件，那么我们完全可以把第i种物品转化为[V/w[i]]件费用及价值均不变的物品，然后求解这个01背包问题。这虽然没有降低它的时间复杂度，但是，确能够有一个清晰的方法来求解问题。 完全背包的优化：和01背包一样，完全背包也可以使用一维数组来求解：我们来看看核心代码：123456for (int i = 0;i&lt;k;i++){ for (int j = w[i];j&lt;=t;j++){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; }} 稍加观察我们就可以发现，和01背包唯一不同的是对V遍历时变为正序。 01背包中逆序是因为F[i][]只和F[i-1][]有关，且第i件的物品加入不会对F[i-1][]状态造成影响。而完全背包则考虑的是第i种物品的出现的问题，第i种物品一旦出现它势必应该对第i种物品还没出现的各状态造成影响。 也就是说，原来没有第i种物品的情况下可能有一个最优解，现在第i种物品出现了，而它的加入有可能得到更优解，所以之前的状态需要进行改变，故需要正序。 2. AC代码123456789101112131415161718192021#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, 0, sizeof(f)); for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = w[i];j&lt;=t;j++){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; } } printf("%d\n",f[t]); }}]]></content>
+    <title><![CDATA[北航算法第三次练习赛-零崎的朋友很多Ⅱ]]></title>
+    <url>%2FBUAAclass3-3.html</url>
+    <content type="text"><![CDATA[致敬DP 解题思路同样，这也是一道01背包问题，所不同的是，它需要最后是分文不剩，即相当于最终的结果是背包需要完全放满，对于这种问题，我们只需要对初始化做一点小小的改变，即除了f[0] = 0外，其它f[]数组值均设置为-1，这样，我们就可以保证f[v]为恰好装满背包时的最优解。 这是为什么呢，我们可以这样考虑：初始化的f[]数组事实上对应的就是在没有任何物品可以放入背包时的合法状态，如果要求背包恰好装满，那么此时只有容量为0的背包可以在什么都不装且价值为0的情况下被“恰好装满”，其它情况都没有合法的解，所以我们可以把他们看作未定义的状态。 AC代码123456789101112131415161718192021222324#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, -1, sizeof(f)); f[0] = 0; for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ if(f[j]&lt;f[j-w[i]]+v[i]&amp;&amp;f[j-w[i]]!=-1) f[j] = f[j-w[i]]+v[i]; } } if(f[t] == -1) printf("jpx\n"); else printf("%d\n",f[t]); }}]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -70,9 +94,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[北航算法第三次练习赛-零崎的补番计划Ⅱ]]></title>
-    <url>%2FBUAAclass3-1.html</url>
-    <content type="text"><![CDATA[致敬DP 1. 解题思路这一题就是一道裸的01背包问题，直接套用01背包模版即可。01背包是最基础的背包问题，特点是：每种物品仅有一件，可以选择放或不放。如果我们用子问题来定义状态：即f[i,j]表示前i件物品恰好放入一个容量为j的背包可以获得的最大价值。那么它的状态转移方程便是： 1f[i,j] = max(f[i-1,j],f[i-1,j-w[i]]+ v[i]); 这个状态转移方程是最基本的背包转移方程。它所表达的意思便是： 我们要求把i个物品放到容量为j的背包中这个问题，如果只考虑第i件物品（要么放，要么不放），那么就可以转化为一个只和前i-1件物品相关的问题。如果不放第i件物品，那么问题就变成了“前i-1件物品放入容量为j的背包中”，价值为F[i-1][j];如果放第i件物品，那么问题就转化为“前i-1件物品放入容量为j-w[i]的背包中”，此时得到的最大价值就是F[i-1,j-w[i]],再加上通过放入第i件物品获得的价值v[i]. 核心代码如下：123456 for (int i = 1; i &lt;= k; i++){ for (int j = 1; j &lt;= w[i] -1 ; j++) f[i][j] =f[i-1][j]; for (int j = w[i];j &lt;= t; j++) f[i][j] =max(f[i-1][j],f[i-1][j-w[i]]+v[i]);} 时间复杂度为 空间优化：通过观察我们可以发现，求解第i个子问题，它只和第 i-1个子问题有关，和之前的问题没有直接的关系，那么，毫无疑问，使用二维数组我们会浪费很多的空间。在这里，我们可以使用滚动数组将二维转化为一维数组求解。 注意这时候我们需要逆序循环第二维。 为什么呢？我们想想f[]数组的意义：在某个i下，f[j]表示的是当前背包容量为j时的最大值，所以在我们开始循环i时，由于还未开始循环，此时f[i]保存的是前一次 i -1 时背包的价值，即此时f[j]对应于f[i-1][j]],那么很明显：我们求解时：f[j] = max(f[j],f[j-w[i]]+v[i]);对应的就是：f[i][j] =max(f[i-1][j],f[i-1][j-w[i]]+v[i]); 核心代码为： 12345 for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ f[j] = max(f[j],f[j-w[i]]+v[i]); }} 时间复杂度为 ##2. AC代码 ## 12345678910111213141516171819202122#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;using namespace std;int f[310][20010],w[500],v[500];int main(){ int t,k; while(~scanf("%d%d",&amp;t,&amp;k)){ memset(f,0,sizeof(f)); memset(w,0,sizeof(w)); memset(v,0,sizeof(v)); for (int i = 1; i &lt;= k; i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 1; i &lt;= k; i++){ for (int j = 1; j &lt;= w[i] -1 ; j++) f[i][j] =f[i-1][j]; for (int j = w[i];j &lt;= t; j++) f[i][j] =max(f[i-1][j],f[i-1][j-w[i]]+v[i]); } printf("%d\n",f[k][t]); }} 空间优化：12345678910111213141516171819202122#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;using namespace std;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, 0, sizeof(f)); for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = t;j&gt;=w[i];j--){ f[j] = max(f[j],f[j-w[i]]+v[i]); } } printf("%d\n",f[t]); }}]]></content>
+    <title><![CDATA[北航算法第三次练习赛-零崎的朋友很多Ⅰ]]></title>
+    <url>%2FBUAAclass3-2.html</url>
+    <content type="text"><![CDATA[致敬DP 1. 解题思路这是一道完全背包问题，非常类似于01背包问题，不同的地方在于每种物品有无限件，也就是说，从每种物品的角度考虑，与它相关的策略已并非取或是不取，而是有取0件，取1件，取2件….直到取V/w[i]件等许多种。 如果仍然按照01背包时的思路，令F[i,j]表示前i种物品恰放入一个容量为v的背包的最大权值。那么可以按照每种物品不同的策略写出状态转移方程：1f[i,j] = max(f[i-1,v-kw[i]+kw[i]) (0&lt;=kw[i]&lt;=v) 这和01背包问题一样有O(VN)个状态需要求解，但是求解每个状态的时间已经不是常数了，对于状态f[i][j]而言，求解的时间是O(v/w[i]),时间复杂度大于O(VN) 其实，对于完全背包，最容易想到的做法 便是将它转化成01背包求解。我们考虑到第i种物品最多选V/w[i]件，那么我们完全可以把第i种物品转化为[V/w[i]]件费用及价值均不变的物品，然后求解这个01背包问题。这虽然没有降低它的时间复杂度，但是，确能够有一个清晰的方法来求解问题。 完全背包的优化：和01背包一样，完全背包也可以使用一维数组来求解：我们来看看核心代码：123456for (int i = 0;i&lt;k;i++){ for (int j = w[i];j&lt;=t;j++){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; }} 稍加观察我们就可以发现，和01背包唯一不同的是对V遍历时变为正序。 01背包中逆序是因为F[i][]只和F[i-1][]有关，且第i件的物品加入不会对F[i-1][]状态造成影响。而完全背包则考虑的是第i种物品的出现的问题，第i种物品一旦出现它势必应该对第i种物品还没出现的各状态造成影响。 也就是说，原来没有第i种物品的情况下可能有一个最优解，现在第i种物品出现了，而它的加入有可能得到更优解，所以之前的状态需要进行改变，故需要正序。 2. AC代码123456789101112131415161718192021#include &lt;cstdio&gt;#include &lt;cstring&gt;const int N = 20010;int v[N],w[N],f[N];int main(){ int t,k; while(~scanf("%d %d",&amp;t,&amp;k)){ memset(v, 0, sizeof(v)); memset(w, 0, sizeof(w)); memset(f, 0, sizeof(f)); for (int i = 0;i&lt;k;i++) scanf("%d %d",&amp;v[i],&amp;w[i]); for (int i = 0;i&lt;k;i++){ for (int j = w[i];j&lt;=t;j++){ if(f[j]&lt;f[j-w[i]]+v[i]) f[j] = f[j-w[i]]+v[i]; } } printf("%d\n",f[t]); }}]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -331,9 +355,9 @@
         <category>最短路</category>
       </categories>
       <tags>
-        <tag>模板</tag>
         <tag>算法</tag>
         <tag>最短路</tag>
+        <tag>模板</tag>
       </tags>
   </entry>
   <entry>
@@ -345,9 +369,9 @@
         <category>最短路</category>
       </categories>
       <tags>
-        <tag>模板</tag>
         <tag>算法</tag>
         <tag>最短路</tag>
+        <tag>模板</tag>
       </tags>
   </entry>
   <entry>
@@ -359,9 +383,9 @@
         <category>最短路</category>
       </categories>
       <tags>
-        <tag>模板</tag>
         <tag>算法</tag>
         <tag>最短路</tag>
+        <tag>模板</tag>
       </tags>
   </entry>
   <entry>
@@ -373,9 +397,9 @@
         <category>最短路</category>
       </categories>
       <tags>
-        <tag>模板</tag>
         <tag>算法</tag>
         <tag>最短路</tag>
+        <tag>模板</tag>
       </tags>
   </entry>
   <entry>
@@ -387,9 +411,9 @@
         <category>最短路</category>
       </categories>
       <tags>
-        <tag>模板</tag>
         <tag>算法</tag>
         <tag>最短路</tag>
+        <tag>模板</tag>
       </tags>
   </entry>
   <entry>
@@ -401,9 +425,9 @@
         <category>最短路</category>
       </categories>
       <tags>
-        <tag>模板</tag>
         <tag>算法</tag>
         <tag>最短路</tag>
+        <tag>模板</tag>
       </tags>
   </entry>
   <entry>
@@ -415,9 +439,9 @@
         <category>最短路</category>
       </categories>
       <tags>
-        <tag>模板</tag>
         <tag>算法</tag>
         <tag>最短路</tag>
+        <tag>模板</tag>
       </tags>
   </entry>
   <entry>
